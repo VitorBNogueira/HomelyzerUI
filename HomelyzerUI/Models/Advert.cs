@@ -1,4 +1,5 @@
-﻿using HomelyzerUI.Enums;
+﻿using HomelyzerUI.Models;
+using HomelyzerUI.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomelyzerUI.Model;
+namespace HomelyzerUI.Models;
 
 public sealed class Advert
 {

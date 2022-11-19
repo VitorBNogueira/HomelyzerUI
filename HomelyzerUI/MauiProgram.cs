@@ -1,4 +1,7 @@
-﻿namespace HomelyzerUI;
+﻿using HomelyzerUI.Common.HomelyzerClient;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace HomelyzerUI;
 
 public static class MauiProgram
 {
@@ -12,6 +15,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+		builder.Services.AddScoped<MainPage>();
+		builder.Services.AddScoped<IMyHttpClient, HomelyzerClient>();
 
 		return builder.Build();
 	}

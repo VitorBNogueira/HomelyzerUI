@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomelyzerUI.Enums
+namespace HomelyzerUI.Models.Enums
 {
     public enum EAdvertType
     {
