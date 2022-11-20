@@ -15,9 +15,9 @@
         {
           "Documents": [
             {
-              "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\Platforms\\Android\\MainApplication.cs",
-              "RelativePath": "..\\..\\HomelyzerUI\\Platforms\\Android\\MainApplication.cs",
-              "FullName": "MainApplication.cs",
+              "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\Models\\Advert.cs",
+              "RelativePath": "..\\..\\HomelyzerUI\\Models\\Advert.cs",
+              "FullName": "Advert.cs",
               "DockedHeight": {
                 "UnitType": "Stretch",
                 "Value": 200
@@ -26,15 +26,14 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 6,
-              "Column": 10,
-              "IsPinned": false,
-              "IsSelected": true
+              "Line": 26,
+              "Column": 24,
+              "IsPinned": false
             },
             {
-              "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\App.xaml.cs",
-              "RelativePath": "..\\..\\HomelyzerUI\\App.xaml.cs",
-              "FullName": "App.xaml.cs",
+              "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\ViewModels\\HomeAdvertsVM.cs",
+              "RelativePath": "..\\..\\HomelyzerUI\\ViewModels\\HomeAdvertsVM.cs",
+              "FullName": "HomeAdvertsVM.cs",
               "DockedHeight": {
                 "UnitType": "Stretch",
                 "Value": 200
@@ -43,8 +42,8 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 5,
-              "Column": 24,
+              "Line": 16,
+              "Column": 23,
               "IsPinned": false
             },
             {
@@ -59,9 +58,10 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 35,
-              "Column": 17,
-              "IsPinned": false
+              "Line": 100,
+              "Column": 67,
+              "IsPinned": false,
+              "IsSelected": true
             },
             {
               "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\MainPage.xaml.cs",
@@ -75,24 +75,8 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 26,
-              "Column": 56,
-              "IsPinned": false
-            },
-            {
-              "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\Common\\HomelyzerClient\\HomelyzerClient.cs",
-              "RelativePath": "..\\..\\HomelyzerUI\\Common\\HomelyzerClient\\HomelyzerClient.cs",
-              "FullName": "HomelyzerClient.cs",
-              "DockedHeight": {
-                "UnitType": "Stretch",
-                "Value": 200
-              },
-              "DockedWidth": {
-                "UnitType": "Stretch",
-                "Value": 200
-              },
-              "Line": 28,
-              "Column": 59,
+              "Line": 17,
+              "Column": 9,
               "IsPinned": false
             }
           ],

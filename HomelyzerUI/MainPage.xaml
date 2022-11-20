@@ -1,41 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:HomelyzerUI.ViewModels"
+             xmlns:models="clr-namespace:HomelyzerUI.Models"
+             x:DataType="viewmodels:HomeAdvertsVM"
              x:Class="HomelyzerUI.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <Grid
+        BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="AUTO"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Homelyzer -->
+        <HorizontalStackLayout>
+            <Label Text="Home" TextColor="Black" FontSize="35"/>
+            <Label Text="lyzer" TextColor="PaleVioletRed" FontSize="35"/>
+        </HorizontalStackLayout>
+        
+        <!-- Scrollable Adverts -->
+        <CollectionView ItemsSource="{Binding Adverts}"
+                        Grid.Row="1"
+                        
+                        BackgroundColor="LightGray"
+                        >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Advert">
+                    <Border MinimumHeightRequest="350"
+                            Stroke="white"
+                            StrokeThickness="3"
+                            BackgroundColor="Gray"
+                            >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!--<Image Source="{Binding Image}/>"-->
+                            
+                            <Grid Grid.Column="1" Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- Name -->
+                                <Label Text="{Binding Name}" 
+                                       Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                                       FontSize="15"/>
+                                <!-- Address -->
+                                <Label Text="{Binding Address}" 
+                                       Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                       FontSize="15"/>
+                                <!-- Type -->
+                                <Label Text="{Binding Type}" 
+                                       Grid.Column="0" Grid.Row="2"
+                                       FontSize="15"/>
+                                <!-- Price -->
+                                <Label Text="{Binding Price}" 
+                                       Grid.Column="1" Grid.Row="2"
+                                       FontSize="15"/>
+                                <!-- Description -->
+                                <Label Text="{Binding Description}" 
+                                       Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
+                                       FontSize="15"/>
+                                <!-- PersonalNotes -->
+                                <Label Text="{Binding PersonalNotes}" 
+                                       Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
+                                       FontSize="15"/>
+                                <!-- MeetingTime -->
+                                <Label Text="Meeting: " 
+                                       Grid.Column="0" Grid.Row="5"
+                                       FontSize="15"/>
+                                <Label Text="{Binding MeetingTime}" 
+                                       Grid.Column="1" Grid.Row="5"
+                                       FontSize="15"/>
+                                <!-- Score -->
+                                <Label Text="Score: " 
+                                       Grid.Column="0" Grid.Row="6"
+                                       FontSize="15"/>
+                                <Label Text="{Binding Score}" 
+                                       Grid.Column="1" Grid.Row="6"
+                                       FontSize="15"/>
+                                
+                            </Grid>
+                            
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        
+        </CollectionView>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
+        <!-- New Advert Button-->
+        <Button Text="New Advert"
+                
+                TextColor="White"
                 FontSize="32"
-                HorizontalOptions="Center" />
+                BackgroundColor="DarkRed"
+                Padding="5"
+                
+                Grid.Row="2"
+                />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>
