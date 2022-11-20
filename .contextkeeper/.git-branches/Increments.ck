@@ -26,9 +26,11 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 26,
-              "Column": 24,
-              "IsPinned": false
+              "Line": 20,
+              "Column": 42,
+              "IsPinned": false,
+              "IsActive": true,
+              "IsSelected": true
             },
             {
               "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\ViewModels\\HomeAdvertsVM.cs",
@@ -58,10 +60,9 @@
                 "UnitType": "Stretch",
                 "Value": 200
               },
-              "Line": 100,
-              "Column": 67,
-              "IsPinned": false,
-              "IsSelected": true
+              "Line": 45,
+              "Column": 1,
+              "IsPinned": false
             },
             {
               "FilePath": "D:\\Programacao\\HomelyzerUI\\HomelyzerUI\\HomelyzerUI\\MainPage.xaml.cs",

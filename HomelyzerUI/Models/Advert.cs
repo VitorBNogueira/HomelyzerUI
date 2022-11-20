@@ -23,7 +23,9 @@ public sealed class Advert
     public DateTime MeetingTime { get; set; }
     public bool IncludesBills { get; set; }
     public int OwnerId { get; set; }
+    public List<string> Pictures { get; set; }
     public double Score { get; set; }
+    public string Url { get; set; }
 
     public Owner Owner { get; set; }
 }

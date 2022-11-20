@@ -24,7 +24,7 @@
         <CollectionView ItemsSource="{Binding Adverts}"
                         Grid.Row="1"
                         
-                        BackgroundColor="LightGray"
+                        BackgroundColor="PaleVioletRed"
                         >
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
@@ -35,16 +35,16 @@
                     <Border MinimumHeightRequest="350"
                             Stroke="white"
                             StrokeThickness="3"
-                            BackgroundColor="Gray"
+                            BackgroundColor="White"
                             >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <!--<Image Source="{Binding Image}/>"-->
-                            
+
+                            <Image Source="{Binding Images[0]}"/>
+
                             <Grid Grid.Column="1" Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -116,6 +116,8 @@
                 FontSize="32"
                 BackgroundColor="DarkRed"
                 Padding="5"
+                BorderColor="White"
+                BorderWidth="3"
                 
                 Grid.Row="2"
                 />
