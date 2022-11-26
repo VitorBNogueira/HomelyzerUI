@@ -13,101 +13,100 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Homelyzer -->
         <HorizontalStackLayout>
             <Label Text="Home" TextColor="Black" FontSize="35"/>
             <Label Text="lyzer" TextColor="PaleVioletRed" FontSize="35"/>
         </HorizontalStackLayout>
-        
-        <!-- Scrollable Adverts -->
-        <CollectionView ItemsSource="{Binding Adverts}"
-                        Grid.Row="1"
-                        
-                        BackgroundColor="PaleVioletRed"
-                        >
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
+
+        <RefreshView
+            Grid.Row="1"
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding LoadAdvertsCommand}"
+            >
+
+            <!-- Scrollable Adverts -->
+            <CollectionView 
+                ItemsSource="{Binding Adverts}"
+                BackgroundColor="PaleVioletRed"
+                >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
                                    ItemSpacing="5"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Advert">
-                    <Border MinimumHeightRequest="350"
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Advert">
+                        <Border MinimumHeightRequest="350"
                             Stroke="white"
                             StrokeThickness="3"
                             BackgroundColor="White"
                             >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Image Source="{Binding Images[0]}"/>
-
-                            <Grid Grid.Column="1" Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                
-                                <!-- Name -->
-                                <Label Text="{Binding Name}" 
+
+                                <!-- Image -->
+                                <Image Source="{Binding Pictures[0]}"/>
+
+                                <Grid Grid.Column="1" Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Name -->
+                                    <Label Text="{Binding Name}" 
                                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                                        FontSize="15"/>
-                                <!-- Address -->
-                                <Label Text="{Binding Address}" 
+                                    <!-- Address -->
+                                    <Label Text="{Binding Address}" 
                                        Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                                        FontSize="15"/>
-                                <!-- Type -->
-                                <Label Text="{Binding Type}" 
-                                       Grid.Column="0" Grid.Row="2"
-                                       FontSize="15"/>
-                                <!-- Price -->
-                                <Label Text="{Binding Price}" 
+                                    <!-- Price -->
+                                    <Label Text="{Binding Price}" 
                                        Grid.Column="1" Grid.Row="2"
                                        FontSize="15"/>
-                                <!-- Description -->
-                                <Label Text="{Binding Description}" 
-                                       Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-                                       FontSize="15"/>
-                                <!-- PersonalNotes -->
-                                <Label Text="{Binding PersonalNotes}" 
+                                    <!-- PersonalNotes -->
+                                    <Label Text="{Binding PersonalNotes}" 
                                        Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                                        FontSize="15"/>
-                                <!-- MeetingTime -->
-                                <Label Text="Meeting: " 
+                                    <!-- MeetingTime -->
+                                    <Label Text="Meeting: " 
                                        Grid.Column="0" Grid.Row="5"
                                        FontSize="15"/>
-                                <Label Text="{Binding MeetingTime}" 
+                                    <Label Text="{Binding MeetingTime}" 
                                        Grid.Column="1" Grid.Row="5"
                                        FontSize="15"/>
-                                <!-- Score -->
-                                <Label Text="Score: " 
+                                    <!-- Score -->
+                                    <Label Text="Score: " 
                                        Grid.Column="0" Grid.Row="6"
                                        FontSize="15"/>
-                                <Label Text="{Binding Score}" 
+                                    <Label Text="{Binding Score}" 
                                        Grid.Column="1" Grid.Row="6"
                                        FontSize="15"/>
-                                
+
+                                </Grid>
+
                             </Grid>
-                            
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        
-        </CollectionView>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
 
         <!-- New Advert Button-->
         <Button Text="New Advert"

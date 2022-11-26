@@ -6,6 +6,6 @@
         Uri GetAllAdvertsUri { get; set; }
         string Host { get; set; }
 
-        Task<HttpResponseMessage> GetAllAdverts();
+        Task<HttpResponseMessage> GetAllAdvertsAsync();
     }
 }

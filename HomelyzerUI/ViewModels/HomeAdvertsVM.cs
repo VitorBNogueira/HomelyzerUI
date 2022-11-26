@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
 using Newtonsoft.Json;
@@ -16,39 +17,28 @@ public partial class HomeAdvertsVM : ObservableObject
     public List<Advert> _adverts;
 
     [ObservableProperty]
-    public List<string> test;
-
-    [ObservableProperty]
-    public string test2;
+    public bool isRefreshing;
 
     private readonly IMyHttpClient _httpClient;
 
     public HomeAdvertsVM(IMyHttpClient httpClient)
     {
-        Test2 = "cenas";
-
-        Test = new List<string>
-        {
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-            "Lorem ipsum dolor sit amet, consectetur",
-        };
-
         this._httpClient = httpClient;
-        LoadAdverts();
+        LoadAdvertsAsync();
     }
 
-    public async Task LoadAdverts()
+    [RelayCommand]
+    public async Task LoadAdvertsAsync()
     {
-        var result = await _httpClient.GetAllAdverts();
+        try
+        {
+            var result = await _httpClient.GetAllAdvertsAsync();
 
-        Adverts = JsonConvert.DeserializeObject<List<Advert>>(await result.Content.ReadAsStringAsync());
-
-        
+            Adverts = JsonConvert.DeserializeObject<List<Advert>>(await result.Content.ReadAsStringAsync());
+        }
+        finally
+        {
+            IsRefreshing = false;
+        }
     }
 }

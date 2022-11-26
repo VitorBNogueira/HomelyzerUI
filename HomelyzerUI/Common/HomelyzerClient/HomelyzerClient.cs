@@ -25,7 +25,7 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         GetAllAdvertsUri = uriBuilder.Uri;
     }
 
-    public async Task<HttpResponseMessage> GetAllAdverts()
+    public async Task<HttpResponseMessage> GetAllAdvertsAsync()
     {
         return await this.GetAsync(GetAllAdvertsUri);
     }
