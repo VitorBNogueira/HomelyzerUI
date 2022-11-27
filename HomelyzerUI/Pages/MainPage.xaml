@@ -37,21 +37,37 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Advert">
-                        <Border MinimumHeightRequest="350"
+                        <Border MinimumHeightRequest="500"
                             Stroke="white"
                             StrokeThickness="3"
                             BackgroundColor="White"
                             >
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                                <!-- Image -->
+                                <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= LoadAdvertsCommand}"
+                                        CommandParameter="{Binding AdvertId}"
+                                        />
+                                </Grid.GestureRecognizers>-->
+
+                                <!-- Picture -->
                                 <Image Source="{Binding Pictures[0]}"/>
 
-                                <Grid Grid.Column="1" Padding="10">
+                                <!--Invisible Button-->
+                                <Button
+                                    Grid.RowSpan="2"
+                                    
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= GetAdvertDetailsPageCommand}"
+                                    CommandParameter="{Binding AdvertId}"
+                                    
+                                    ></Button>
+                                
+                                <Grid Grid.Row="1" Padding="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>

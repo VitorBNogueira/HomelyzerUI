@@ -2,10 +2,12 @@
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
+using HomelyzerUI.Pages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,5 +42,12 @@ public partial class HomeAdvertsVM : ObservableObject
         {
             IsRefreshing = false;
         }
+    }
+
+    [RelayCommand]
+    public async Task GetAdvertDetailsPageAsync(int advertId)
+    {
+        await Shell.Current.GoToAsync($"{nameof(AdvertDetails)}?Id={advertId.ToString()}");
+        //await Navigation.PushAsync(new AdvertDetails(_httpClient, advertId));
     }
 }

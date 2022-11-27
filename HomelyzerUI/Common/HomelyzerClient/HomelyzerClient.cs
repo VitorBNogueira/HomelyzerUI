@@ -8,25 +8,28 @@ namespace HomelyzerUI.Common.HomelyzerClient;
 
 internal class HomelyzerClient : HttpClient, IMyHttpClient
 {
+    private UriBuilder AdvertsUriBuilder { get; set; }
     public string Host { get; set; }
-    public string AdvertsPath { get; set; }
-    public Uri GetAllAdvertsUri { get; set; }
+    public Uri GetAdvertUri { get; set; }
 
     public HomelyzerClient()
     {
         Host = "homelyzer.azurewebsites.net";
-        AdvertsPath = "adverts";
 
-        UriBuilder uriBuilder = new UriBuilder();
-        uriBuilder.Scheme = "http";
-        uriBuilder.Host = Host;
-        uriBuilder.Path = AdvertsPath;
-
-        GetAllAdvertsUri = uriBuilder.Uri;
+        AdvertsUriBuilder = new UriBuilder();
+        AdvertsUriBuilder.Scheme = "http";
+        AdvertsUriBuilder.Host = Host;
     }
 
     public async Task<HttpResponseMessage> GetAllAdvertsAsync()
     {
-        return await this.GetAsync(GetAllAdvertsUri);
+        AdvertsUriBuilder.Path = "adverts";
+        return await this.GetAsync(AdvertsUriBuilder.Uri);
+    }
+
+    public async Task<HttpResponseMessage> GetAdvertAsync(int id)
+    {
+        AdvertsUriBuilder.Path = $"adverts/{id.ToString()}";
+        return await this.GetAsync(AdvertsUriBuilder.Uri);
     }
 }

@@ -6,13 +6,12 @@ namespace HomelyzerUI;
 public partial class MainPage : ContentPage
 {
 	private readonly IMyHttpClient _httpClient;
-	int count = 0;
 
-	public MainPage(IMyHttpClient httpClient)
+	public MainPage(IMyHttpClient httpClient, HomeAdvertsVM vm)
 	{
         _httpClient = httpClient;
 
-		BindingContext = new HomeAdvertsVM(_httpClient);
+		BindingContext = vm;
 
         InitializeComponent();
 	}
