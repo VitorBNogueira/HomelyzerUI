@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HomelyzerUI.ViewModels;
 
-[QueryProperty("AdvertId", "Id")]
+[QueryProperty("AdvertId", "AdvertId")]
 
 public partial class AdvertDetailsVM : ObservableObject
 {
@@ -22,22 +22,21 @@ public partial class AdvertDetailsVM : ObservableObject
     public bool isRefreshing;
 
     [ObservableProperty]
-    public string advertId;
+    public int advertId;
 
     private readonly IMyHttpClient _httpClient;
 
     public AdvertDetailsVM(IMyHttpClient httpClient)
     {
         this._httpClient = httpClient;
-        LoadAdvertAsync(Convert.ToInt32(AdvertId));
     }
 
     [RelayCommand]
-    public async Task LoadAdvertAsync(int advertId)
+    public async Task LoadAdvertAsync()
     {
         try
         {
-            var result = await _httpClient.GetAdvertAsync(advertId);
+            var result = await _httpClient.GetAdvertAsync(AdvertId);
 
             Advert = JsonConvert.DeserializeObject<Advert>(await result.Content.ReadAsStringAsync());
         }

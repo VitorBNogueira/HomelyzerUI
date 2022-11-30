@@ -48,24 +48,24 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <!--<Grid.GestureRecognizers>
+                                <Grid.GestureRecognizers>
                                     <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= LoadAdvertsCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= GetAdvertDetailsPageCommand}"
                                         CommandParameter="{Binding AdvertId}"
                                         />
-                                </Grid.GestureRecognizers>-->
+                                </Grid.GestureRecognizers>
 
                                 <!-- Picture -->
                                 <Image Source="{Binding Pictures[0]}"/>
 
                                 <!--Invisible Button-->
-                                <Button
+                                <!--<Button
                                     Grid.RowSpan="2"
                                     
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= GetAdvertDetailsPageCommand}"
                                     CommandParameter="{Binding AdvertId}"
                                     
-                                    ></Button>
+                                    ></Button>-->
                                 
                                 <Grid Grid.Row="1" Padding="10">
                                     <Grid.RowDefinitions>
