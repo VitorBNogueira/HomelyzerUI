@@ -21,6 +21,8 @@ public partial class HomeAdvertsVM : ObservableObject
     [ObservableProperty]
     public bool isRefreshing;
 
+    public int NameFontSize { get; set; }
+
     private readonly IMyHttpClient _httpClient;
 
     public HomeAdvertsVM(IMyHttpClient httpClient)
@@ -37,6 +39,11 @@ public partial class HomeAdvertsVM : ObservableObject
             var result = await _httpClient.GetAllAdvertsAsync();
 
             Adverts = JsonConvert.DeserializeObject<List<Advert>>(await result.Content.ReadAsStringAsync());
+
+            //foreach (Advert ad in Adverts)
+            //{
+            //    ad.NameFontSize = Convert.ToInt32(Math.Round(35d - Convert.ToDouble(ad.Name.Length) / 120d * Convert.ToDouble(ad.Name.Length)));
+            //}
         }
         finally
         {

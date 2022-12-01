@@ -28,4 +28,7 @@ public sealed class Advert
     public string Url { get; set; }
 
     public Owner Owner { get; set; }
+
+    //// variable size according to Name length
+    //public int NameFontSize { get; set; }
 }
