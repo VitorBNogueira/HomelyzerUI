@@ -6,7 +6,6 @@ namespace HomelyzerUI.Pages;
 
 public partial class AdvertDetails : ContentPage
 {
-    private readonly IMyHttpClient _httpClient;
     private AdvertDetailsVM _vm;
     public AdvertDetails(AdvertDetailsVM vm)
     {

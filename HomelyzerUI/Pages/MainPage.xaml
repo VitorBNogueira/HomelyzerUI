@@ -77,7 +77,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -113,15 +113,15 @@
                                            
                                         FontSize="15"/>
 
-                                    <!-- Type -->
-                                    <Label Text="{Binding IncludesBills}" 
+                                    <!-- BillIncluded -->
+                                    <Label Text="{Binding IncludesBills, Converter= {StaticResource IncBillsConverter}}" 
                                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1"
                                         HorizontalOptions="End"
                                            
                                         BackgroundColor="DimGray"
                                         TextColor="White"
                                            
-                                        FontSize="15"/>
+                                        FontSize="11"/>
                                     
                                     <!-- Price -->
                                     <Label Text="{Binding Price}" 
@@ -176,11 +176,12 @@
 
                                     <!-- PersonalNotes -->
                                     <Label Text="{Binding PersonalNotes}" 
-                                       Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
+                                        Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
                                            
-                                       BackgroundColor="Gray"
+                                        BackgroundColor="LightGray"
+                                        TextColor="Black"
                                            
-                                       FontSize="15"/>
+                                        FontSize="16"/>
 
                                 </Grid>
 
