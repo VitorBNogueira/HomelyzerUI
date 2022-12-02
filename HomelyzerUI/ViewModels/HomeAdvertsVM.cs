@@ -57,4 +57,11 @@ public partial class HomeAdvertsVM : ObservableObject
         await Shell.Current.GoToAsync($"{nameof(AdvertDetails)}?AdvertId={advertId}");
         //await Navigation.PushAsync(new AdvertDetails(_httpClient, advertId));
     }
+
+    [RelayCommand]
+    public async Task PhoneCallAsync(string number)
+    {
+        if (PhoneDialer.Default.IsSupported)
+            PhoneDialer.Default.Open(number);
+    }
 }

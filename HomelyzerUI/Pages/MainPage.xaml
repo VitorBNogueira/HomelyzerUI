@@ -14,7 +14,7 @@
             <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <!-- Homelyzer -->
+        <!-- Homelyzer Banner-->
         <HorizontalStackLayout>
             <Label Text="  Home" TextColor="Black" FontSize="35" FontAttributes="Bold" VerticalTextAlignment="Center"/>
             <Label Text="lyzer" TextColor="PaleVioletRed" FontSize="35" VerticalTextAlignment="Center"/>
@@ -51,7 +51,8 @@
 
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= GetAdvertDetailsPageCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                        Path= GetAdvertDetailsPageCommand}"
                                         CommandParameter="{Binding AdvertId}"
                                         />
                                 </Grid.GestureRecognizers>
@@ -172,6 +173,10 @@
                                         FontAttributes="Bold"
                                         BorderColor="PaleVioletRed"
                                         BorderWidth="3"
+                                        
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                                    Path= PhoneCallCommand}"
+                                        CommandParameter="{Binding PhoneContact}"
                                     />
 
                                     <!---->
