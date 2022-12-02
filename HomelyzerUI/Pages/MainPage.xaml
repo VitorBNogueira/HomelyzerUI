@@ -36,7 +36,7 @@
                                    ItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Advert">
+                    <DataTemplate x:DataType="models:AdvertDTO">
                         <Border MinimumHeightRequest="550"
                             Stroke="white"
                             StrokeThickness="5"
@@ -165,13 +165,16 @@
                                     <Button
                                         Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2"
                                         
-                                        Text="937905261"
-                                        BackgroundColor="LightYellow"
+                                        Text="{Binding PhoneContact}"
+                                        BackgroundColor="WhiteSmoke"
                                         FontSize="25"
                                         TextColor="Black"
+                                        FontAttributes="Bold"
+                                        BorderColor="PaleVioletRed"
+                                        BorderWidth="3"
                                     />
 
-                                    <!--Text="{Binding Owner.PhoneContact}"-->
+                                    <!---->
 
 
                                     <!-- PersonalNotes -->
@@ -181,8 +184,10 @@
                                         BackgroundColor="LightGray"
                                         TextColor="Black"
                                            
-                                        FontSize="16"/>
-
+                                        FontSize="16"
+                                           
+                                        Padding="5"
+                                    />
                                 </Grid>
 
                             </Grid>

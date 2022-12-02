@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace HomelyzerUI.ViewModels;
 
-[QueryProperty("AdvertId", "AdvertId")]
+[QueryProperty(nameof(AdvertId), nameof(AdvertId))]
 
 public partial class AdvertDetailsVM : ObservableObject
 {
     [ObservableProperty]
-    public Advert _advert;
+    public AdvertDTO _advert;
 
     [ObservableProperty]
     public bool isRefreshing;
@@ -38,7 +38,7 @@ public partial class AdvertDetailsVM : ObservableObject
         {
             var result = await _httpClient.GetAdvertAsync(AdvertId);
 
-            Advert = JsonConvert.DeserializeObject<Advert>(await result.Content.ReadAsStringAsync());
+            Advert = JsonConvert.DeserializeObject<AdvertDTO>(await result.Content.ReadAsStringAsync());
         }
         finally
         {

@@ -16,7 +16,7 @@ namespace HomelyzerUI.ViewModels;
 public partial class HomeAdvertsVM : ObservableObject
 {
     [ObservableProperty]
-    public List<Advert> _adverts;
+    public List<AdvertDTO> _adverts;
 
     [ObservableProperty]
     public bool isRefreshing;
@@ -38,7 +38,7 @@ public partial class HomeAdvertsVM : ObservableObject
         {
             var result = await _httpClient.GetAllAdvertsAsync();
 
-            Adverts = JsonConvert.DeserializeObject<List<Advert>>(await result.Content.ReadAsStringAsync());
+            Adverts = JsonConvert.DeserializeObject<List<AdvertDTO>>(await result.Content.ReadAsStringAsync());
 
             //foreach (Advert ad in Adverts)
             //{
