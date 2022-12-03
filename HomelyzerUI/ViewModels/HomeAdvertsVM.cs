@@ -55,7 +55,6 @@ public partial class HomeAdvertsVM : ObservableObject
     public async Task GetAdvertDetailsPageAsync(int advertId)
     {
         await Shell.Current.GoToAsync($"{nameof(AdvertDetails)}?AdvertId={advertId}");
-        //await Navigation.PushAsync(new AdvertDetails(_httpClient, advertId));
     }
 
     [RelayCommand]

@@ -58,7 +58,16 @@
                                 </Grid.GestureRecognizers>
 
                                 <!-- Picture -->
-                                <Image Source="{Binding Pictures[0]}"/>
+                                <Image>
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Pictures[0]}"
+                                                        CachingEnabled="True"
+                                                        CacheValidity="23:00:00.0"
+                                                        >
+                                            
+                                        </UriImageSource>
+                                    </Image.Source>
+                                </Image>
 
                                 <!--Invisible Button-->
                                 <!--<Button

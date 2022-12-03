@@ -6,12 +6,85 @@
              x:DataType="viewmodels:AdvertDetailsVM"
              Title="AdvertDetails">
 
-    <Grid
-        BackgroundColor="PaleVioletRed">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
+
+        <Image
+            IsVisible="{Binding ImageIsVisible}"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            >
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= ColapsePictureCommand}"
+                />
+            </Image.GestureRecognizers>
+            <Image.Source>
+                <UriImageSource 
+                    Uri="{Binding ExpandedPicture}"
+                    CachingEnabled="True"
+                    CacheValidity="23:00:00.0"
+                />
+            </Image.Source>
+        </Image>
+
+        <RefreshView
+            IsVisible="{Binding ViewIsVisible}"
+            
+            Grid.Row="0"
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding LoadAdvertCommand}"
+            >
+            <Grid
+            BackgroundColor="PaleVioletRed"
+            Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                </Grid.RowDefinitions>
+
+
+
+
+                <!--Pictures-->
+                <CarouselView 
+                ItemsSource="{Binding Advert.Pictures}"
+                
+                Loop="False"
+                >
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image>
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                    Path= ExpandPictureCommand}"
+                                    CommandParameter="{Binding .}"
+                                />
+                                </Image.GestureRecognizers>
+                                <Image.Source>
+                                    <UriImageSource 
+                                    Uri="{Binding .}"
+                                    CachingEnabled="True"
+                                    CacheValidity="23:00:00.0"
+                                />
+                                </Image.Source>
+                            </Image>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </Grid>
+        </RefreshView>
     </Grid>
 </ContentPage>

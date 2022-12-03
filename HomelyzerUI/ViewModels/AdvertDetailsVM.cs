@@ -24,6 +24,14 @@ public partial class AdvertDetailsVM : ObservableObject
     [ObservableProperty]
     public int advertId;
 
+    [ObservableProperty]
+    public bool imageIsVisible = false;
+    [ObservableProperty]
+    public bool viewIsVisible = true;
+
+    [ObservableProperty]
+    public string expandedPicture;
+
     private readonly IMyHttpClient _httpClient;
 
     public AdvertDetailsVM(IMyHttpClient httpClient)
@@ -44,5 +52,21 @@ public partial class AdvertDetailsVM : ObservableObject
         {
             IsRefreshing = false;
         }
+    }
+
+    [RelayCommand]
+    public void ExpandPicture(string url)
+    {
+        ExpandedPicture= url;
+        ViewIsVisible= false;
+        ImageIsVisible= true;
+    }
+
+    [RelayCommand]
+    public void ColapsePicture()
+    {
+        ViewIsVisible = true;
+        ImageIsVisible = false;
+        ExpandedPicture = "";
     }
 }
