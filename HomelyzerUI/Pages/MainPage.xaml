@@ -69,15 +69,6 @@
                                     </Image.Source>
                                 </Image>
 
-                                <!--Invisible Button-->
-                                <!--<Button
-                                    Grid.RowSpan="2"
-                                    
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, Path= GetAdvertDetailsPageCommand}"
-                                    CommandParameter="{Binding AdvertId}"
-                                    
-                                    ></Button>-->
-                                
                                 <Grid Grid.Row="1" Padding="0" BackgroundColor="LightGray">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>

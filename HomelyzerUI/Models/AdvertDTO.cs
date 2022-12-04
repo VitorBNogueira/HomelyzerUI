@@ -17,7 +17,7 @@ public sealed class AdvertDTO
     public string? Address { get; set; }
     public string? Area { get; set; }
     public string? Price { get; set; }
-    public int? Type { get; set; }
+    public EAdvertType? Type { get; set; }
     public string? Description { get; set; }
     public string? PersonalNotes { get; set; }
     public DateTime? MeetingTime { get; set; }

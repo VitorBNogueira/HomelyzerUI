@@ -35,34 +35,25 @@
             IsVisible="{Binding ViewIsVisible}"
             
             Grid.Row="0"
+            
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding LoadAdvertCommand}"
             >
             <Grid
-            BackgroundColor="PaleVioletRed"
+            BackgroundColor="WhiteSmoke"
             Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="300"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="200"/>
                     <RowDefinition Height="AUTO"/>
                 </Grid.RowDefinitions>
 
-
-
-
                 <!--Pictures-->
-                <CarouselView 
-                ItemsSource="{Binding Advert.Pictures}"
+                <CarouselView
+                    Grid.Row="0"
+                    
+                    ItemsSource="{Binding Advert.Pictures}"
                 
-                Loop="False"
-                >
+                    Loop="False">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Image>
@@ -84,6 +75,132 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
+                
+                
+                <!--Info-->
+                <Grid
+                    Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="AUTO"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Name-->
+                    <Label
+                        Grid.Row="1"
+                    
+                        Text="{Binding Advert.Name}"
+                    
+                        TextColor="Black"/>
+
+                    <!--Address-->
+                    <Label
+                        Grid.Row="2"
+                    
+                        Text="{Binding Advert.Address}"
+                    
+                        TextColor="Black"/>
+                    
+                    <!--Type-->
+                    <Label
+                        Grid.Row="3"
+                    
+                        Text="{Binding Advert.Type}"
+                    
+                        TextColor="Black"/>
+
+                    <!--Price-->
+                    <Label
+                        Grid.Row="4"
+                    
+                        Text="{Binding Advert.Price}"
+                    
+                        TextColor="Black"/>
+
+                    <!--Area-->
+                    <Label
+                        Grid.Row="5"
+                    
+                        Text="{Binding Advert.Area}"
+                    
+                        TextColor="Black"/>
+
+                    <!--Description-->
+                    <Label
+                        Grid.Row="6"
+                    
+                        Text="{Binding Advert.Description}"
+                    
+                        TextColor="Black"/>
+
+                    <!--IncludesBills-->
+                    <Label
+                        Grid.Row="7"
+                    
+                        Text="{Binding Advert.IncludesBills, Converter= {StaticResource IncBillsConverter}}"
+                    
+                        TextColor="Black"/>
+                    
+                    <!--Description-->
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                    
+                        Text="{Binding Advert.Description}"
+                    
+                        TextColor="Black"/>
+
+                    <!--OwnerName-->
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="3"
+                    
+                        Text="{Binding Advert.OwnerName}"
+                    
+                        TextColor="Black"/>
+
+
+                    <!--OwnerPhone-->
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="5"
+                    
+                        Text="{Binding Advert.PhoneContact}"
+                    
+                        TextColor="Black"/>
+
+                    <!--OwnerEmail-->
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                    
+                        Text="{Binding Advert.EmailContact}"
+                    
+                        TextColor="Black"/>
+                    
+                    <!--Personal Notes-->
+                    <Entry
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        
+                        Text="{Binding Advert.PersonalNotes}"
+                        
+                        TextColor="Black"/>
+                </Grid>
             </Grid>
         </RefreshView>
     </Grid>
