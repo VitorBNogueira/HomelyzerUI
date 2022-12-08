@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace HomelyzerUI.ViewModels;
 
@@ -63,10 +64,24 @@ public partial class AdvertDetailsVM : ObservableObject
     }
 
     [RelayCommand]
-    public void ColapsePicture()
+    public void BackToView()
     {
         ViewIsVisible = true;
         ImageIsVisible = false;
         ExpandedPicture = "";
+    }
+
+    [RelayCommand]
+    public void OpenMaps()
+    {
+        var enc = HttpUtility.UrlEncode(Advert.Address);
+        Launcher.OpenAsync($"https://www.google.com/maps/search/?api=1&query={enc}");
+    }
+
+    [RelayCommand]
+    public void PhoneCall()
+    {
+        if (PhoneDialer.Default.IsSupported)
+            PhoneDialer.Default.Open(Advert.PhoneContact);
     }
 }

@@ -39,11 +39,6 @@ public partial class HomeAdvertsVM : ObservableObject
             var result = await _httpClient.GetAllAdvertsAsync();
 
             Adverts = JsonConvert.DeserializeObject<List<AdvertDTO>>(await result.Content.ReadAsStringAsync());
-
-            //foreach (Advert ad in Adverts)
-            //{
-            //    ad.NameFontSize = Convert.ToInt32(Math.Round(35d - Convert.ToDouble(ad.Name.Length) / 120d * Convert.ToDouble(ad.Name.Length)));
-            //}
         }
         finally
         {
