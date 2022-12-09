@@ -84,4 +84,13 @@ public partial class AdvertDetailsVM : ObservableObject
         if (PhoneDialer.Default.IsSupported)
             PhoneDialer.Default.Open(Advert.PhoneContact);
     }
+
+    [RelayCommand]
+    public async Task SaveChangesAsync()
+    {
+        Advert.PersonalNotes = Advert.PersonalNotes ?? string.Empty;
+        Advert.Url = Advert.Url ?? string.Empty;
+        Advert.Area = Advert.Area ?? string.Empty;
+        _ = await _httpClient.UpdateAdvertAltAsync(Advert);
+    }
 }

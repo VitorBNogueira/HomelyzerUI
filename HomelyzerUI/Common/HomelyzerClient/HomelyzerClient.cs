@@ -1,6 +1,9 @@
-﻿using System;
+﻿using HomelyzerUI.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +20,7 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         Host = "homelyzer.azurewebsites.net";
 
         AdvertsUriBuilder = new UriBuilder();
-        AdvertsUriBuilder.Scheme = "http";
+        AdvertsUriBuilder.Scheme = "https";
         AdvertsUriBuilder.Host = Host;
     }
 
@@ -31,5 +34,21 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
     {
         AdvertsUriBuilder.Path = $"adverts/{id.ToString()}";
         return await this.GetAsync(AdvertsUriBuilder.Uri);
+    }
+
+    public async Task<HttpResponseMessage> UpdateAdvertAsync<T>(T data)
+    {
+        AdvertsUriBuilder.Path = $"adverts/advert";
+        var x = await this.PutAsJsonAsync<T>(AdvertsUriBuilder.Uri, data);
+        return x;
+    }
+
+    public async Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO data)
+    {
+        var jsonData = JsonConvert.SerializeObject(data);
+        var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+        AdvertsUriBuilder.Path = $"adverts/advert/";
+        var x = await this.PutAsync(AdvertsUriBuilder.Uri, requestContent);
+        return x;
     }
 }

@@ -92,7 +92,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         
-                        Text="{Binding Advert.Score}"
+                        Text="{Binding Advert.Score, Mode=TwoWay}"
                         
                         TextColor="White"
                         FontSize="35"
@@ -318,6 +318,9 @@
             
                         Text="Save Changes"
                         FontSize="25"
+                        
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                        Path= SaveChangesCommand}"
                     />
                 </Grid>
             </Grid>
