@@ -309,12 +309,26 @@
                         </StackLayout>
                     </ScrollView>
 
-                    <!--Save-->
+                    <!--Go to Original Advert-->
                     <Button 
                         Grid.Row="7"
                         Grid.RowSpan="2"
                         Grid.Column="0"
-                        Grid.ColumnSpan="4"
+                        Grid.ColumnSpan="1"
+            
+                        Text="Original"
+                        FontSize="16"
+                        
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                        Path= GoToOriginalAdCommand}"
+                    />
+
+                    <!--Save-->
+                    <Button 
+                        Grid.Row="7"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
             
                         Text="Save Changes"
                         FontSize="25"

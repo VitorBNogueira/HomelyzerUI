@@ -79,6 +79,13 @@ public partial class AdvertDetailsVM : ObservableObject
     }
 
     [RelayCommand]
+    public void GoToOriginalAd()
+    {
+        if (Uri.IsWellFormedUriString(Advert.Url, UriKind.Absolute))
+            Launcher.OpenAsync(Advert.Url);
+    }
+
+    [RelayCommand]
     public void PhoneCall()
     {
         if (PhoneDialer.Default.IsSupported)
