@@ -51,4 +51,11 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         var x = await this.PutAsync(AdvertsUriBuilder.Uri, requestContent);
         return x;
     }
+
+    public async Task<HttpResponseMessage> SaveAdvertAsync<T>(T data)
+    {
+        AdvertsUriBuilder.Path = $"adverts/advert";
+        var x = await this.PostAsJsonAsync<T>(AdvertsUriBuilder.Uri, data);
+        return x;
+    }
 }

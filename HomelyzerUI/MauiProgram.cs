@@ -19,9 +19,11 @@ public static class MauiProgram
         // pages
         builder.Services.AddScoped<MainPage>();
         builder.Services.AddTransient<AdvertDetails>();
+        builder.Services.AddTransient<NewAdvert>();
         // view models
         builder.Services.AddTransient<HomeAdvertsVM>();
         builder.Services.AddTransient<AdvertDetailsVM>();
+        builder.Services.AddTransient<NewAdvertVM>();
         // http client
         builder.Services.AddScoped<IMyHttpClient, HomelyzerClient>();
 

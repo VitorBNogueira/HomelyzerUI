@@ -53,7 +53,13 @@ public partial class HomeAdvertsVM : ObservableObject
     }
 
     [RelayCommand]
-    public async Task PhoneCallAsync(string number)
+    public async Task GetNewAdvertPageAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(NewAdvert));
+    }
+
+    [RelayCommand]
+    public void PhoneCall(string number)
     {
         if (PhoneDialer.Default.IsSupported)
             PhoneDialer.Default.Open(number);
