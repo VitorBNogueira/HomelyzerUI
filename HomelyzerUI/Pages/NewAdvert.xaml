@@ -6,10 +6,44 @@
              xmlns:models="clr-namespace:HomelyzerUI.Models"
              x:DataType="viewmodels:NewAdvertVM"
              Title="NewAdvert">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView
+        >
+        <StackLayout
+            Padding="0, 50, 0, 0"
+            BackgroundColor="#A07493"
+            >
+            
+            <!--Ad Name-->
+            <Label 
+                Text="Name"
+            />
+            <Entry
+                Text="{Binding NewAd.Name, Mode=OneWayToSource}"
+            />
+
+            <!--Address-->
+            <Label 
+                Text="Address"
+            />
+            <Entry
+                Text="{Binding NewAd.Address, Mode=OneWayToSource}"
+            />
+
+            <!--Area-->
+            <Label 
+                Text="Area"
+            />
+            <Entry
+                Text="{Binding NewAd.Area, Mode=OneWayToSource}"
+            />
+
+            <!--Price-->
+            <Label 
+                Text="Price"
+            />
+            <Entry
+                Text="{Binding NewAd.Price, Mode=OneWayToSource}"
+            />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

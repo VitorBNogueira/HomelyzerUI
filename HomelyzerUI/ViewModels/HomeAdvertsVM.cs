@@ -28,6 +28,7 @@ public partial class HomeAdvertsVM : ObservableObject
     public HomeAdvertsVM(IMyHttpClient httpClient)
     {
         this._httpClient = httpClient;
+        IsRefreshing = true;
         LoadAdvertsAsync();
     }
 

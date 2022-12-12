@@ -38,6 +38,7 @@ public partial class AdvertDetailsVM : ObservableObject
     public AdvertDetailsVM(IMyHttpClient httpClient)
     {
         this._httpClient = httpClient;
+        IsRefreshing = true;
     }
 
     [RelayCommand]

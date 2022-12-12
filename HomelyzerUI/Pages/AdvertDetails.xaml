@@ -96,6 +96,7 @@
                         
                         TextColor="White"
                         FontSize="35"
+                        Keyboard="Numeric"
                         
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"
@@ -287,6 +288,8 @@
                             <!--Description-->
                             <Label
                                 Text="{Binding Advert.Description}"
+                                
+                                MinimumHeightRequest="150"
                                 
                                 LineBreakMode="WordWrap"
                     
