@@ -44,6 +44,20 @@
             <Entry
                 Text="{Binding NewAd.Price, Mode=OneWayToSource}"
             />
+
+            <!--Type-->
+            <Label 
+                Text="Type"
+            />
+            <Picker
+                x:Name="picks"
+                ItemsSource="{Binding Types}"
+                SelectedIndex="{Binding NewAd.Type, Mode=TwoWay, Converter= {StaticResource TypeConverter}}"
+            />
+
+            <Button
+                Command="{Binding PeekValuesCommand}"
+                />
         </StackLayout>
     </ScrollView>
 </ContentPage>

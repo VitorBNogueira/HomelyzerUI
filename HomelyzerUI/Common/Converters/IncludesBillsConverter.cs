@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Maui.Converters;
 using System.Globalization;
 
-namespace HomelyzerUI.Common
+namespace HomelyzerUI.Common.Converters
 {
-    internal sealed class IncludesBillsConverter : BaseConverter<bool, String>
+    internal sealed class IncludesBillsConverter : BaseConverter<bool, string>
     {
         public override string DefaultConvertReturnValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override bool DefaultConvertBackReturnValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

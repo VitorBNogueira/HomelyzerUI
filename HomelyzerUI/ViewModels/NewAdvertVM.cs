@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
+using HomelyzerUI.Models.Enums;
 using HomelyzerUI.Pages;
 using Newtonsoft.Json;
 using System;
@@ -18,11 +19,21 @@ public partial class NewAdvertVM : ObservableObject
     [ObservableProperty]
     public AdvertDTO _newAd;
 
+    public List<string> Types
+    {
+        get
+        {
+            return Enum.GetNames(typeof(EAdvertType)).ToList();
+        }
+    }
+
     private readonly IMyHttpClient _httpClient;
 
     public NewAdvertVM(IMyHttpClient httpClient)
     {
         this._httpClient = httpClient;
+        NewAd = new AdvertDTO();
+        NewAd.Type = EAdvertType.Rent;
     }
 
     [RelayCommand]
@@ -35,5 +46,12 @@ public partial class NewAdvertVM : ObservableObject
         finally
         {
         }
+    }
+
+    [RelayCommand]
+    public async Task PeekValues()
+    {
+        var x = NewAd;
+        var z = x;
     }
 }
