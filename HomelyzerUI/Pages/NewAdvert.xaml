@@ -99,8 +99,8 @@
                 Text="Owner"
             />
             <Picker
-                ItemsSource="{Binding Types}"
-                SelectedIndex="{Binding NewAd.Type, Mode=TwoWay, Converter= {StaticResource TypeConverter}}"
+                ItemsSource="{Binding Owners}"
+                ItemDisplayBinding="{Binding Name}"
             />
 
             
