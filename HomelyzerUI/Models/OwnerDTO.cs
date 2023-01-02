@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomelyzerUI.Models
 {
-    public sealed class Owner
+    public sealed class OwnerDTO
     {
         public int OwnerId { get; set; }
         public string Name { get; set; }

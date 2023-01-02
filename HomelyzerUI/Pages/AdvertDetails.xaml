@@ -96,7 +96,7 @@
                         
                         TextColor="White"
                         FontSize="35"
-                        Keyboard="Numeric"
+                        Keyboard="Telephone"
                         
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"

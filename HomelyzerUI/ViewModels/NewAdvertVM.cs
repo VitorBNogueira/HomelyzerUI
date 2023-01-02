@@ -19,6 +19,9 @@ public partial class NewAdvertVM : ObservableObject
     [ObservableProperty]
     public AdvertDTO _newAd;
 
+    [ObservableProperty]
+    public List<OwnerDTO> _owners;
+
     public List<string> Types
     {
         get
@@ -27,6 +30,14 @@ public partial class NewAdvertVM : ObservableObject
         }
     }
 
+    //public List<string> Owners
+    //{
+    //    get
+    //    {
+    //        return Enum.GetNames(typeof(EAdvertType)).ToList();
+    //    }
+    //}
+
     private readonly IMyHttpClient _httpClient;
 
     public NewAdvertVM(IMyHttpClient httpClient)
@@ -34,6 +45,8 @@ public partial class NewAdvertVM : ObservableObject
         this._httpClient = httpClient;
         NewAd = new AdvertDTO();
         NewAd.Type = EAdvertType.Rent;
+
+        LoadOwnersAsync();
     }
 
     [RelayCommand]
@@ -42,6 +55,20 @@ public partial class NewAdvertVM : ObservableObject
         try
         {
             var result = await _httpClient.GetAllAdvertsAsync();
+        }
+        finally
+        {
+        }
+    }
+
+    [RelayCommand]
+    public async Task LoadOwnersAsync()
+    {
+        try
+        {
+            var result = await _httpClient.GetAllOwnersAsync();
+
+            Owners = JsonConvert.DeserializeObject<List<OwnerDTO>>(await result.Content.ReadAsStringAsync());
         }
         finally
         {

@@ -50,10 +50,60 @@
                 Text="Type"
             />
             <Picker
-                x:Name="picks"
                 ItemsSource="{Binding Types}"
                 SelectedIndex="{Binding NewAd.Type, Mode=TwoWay, Converter= {StaticResource TypeConverter}}"
             />
+
+            <!--Description-->
+            <Label 
+                Text="Description"
+            />
+            <Editor
+                Text="{Binding NewAd.Description, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Personal Notes-->
+            <Label 
+                Text="Personal Notes"
+            />
+            <Editor
+                Text="{Binding NewAd.PersonalNotes, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Meeting Time-->
+            <Label 
+                Text="Meeting Time"
+            />
+            <Entry
+                Text="{Binding NewAd.MeetingTime, Mode=OneWayToSource}"
+            />
+
+            <!--Includes Bills-->
+            <StackLayout
+                Orientation="Horizontal">
+                <Label 
+                    Text="Includes Bills"
+                />
+                <Switch
+                    IsToggled="{Binding NewAd.IncludesBills, Mode=OneWayToSource}"
+                
+                    HorizontalOptions="EndAndExpand"
+                />
+            </StackLayout>
+
+
+            <!--Owner-->
+            <Label 
+                Text="Owner"
+            />
+            <Picker
+                ItemsSource="{Binding Types}"
+                SelectedIndex="{Binding NewAd.Type, Mode=TwoWay, Converter= {StaticResource TypeConverter}}"
+            />
+
+            
 
             <Button
                 Command="{Binding PeekValuesCommand}"
