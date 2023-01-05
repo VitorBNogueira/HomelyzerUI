@@ -17,7 +17,7 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
 
     public HomelyzerClient()
     {
-        Host = "homelyzer.azurewebsites.net";
+        Host = "homelyzer.azurewebsites.net/api";
 
         AdvertsUriBuilder = new UriBuilder();
         AdvertsUriBuilder.Scheme = "https";
