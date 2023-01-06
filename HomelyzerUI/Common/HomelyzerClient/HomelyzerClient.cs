@@ -11,35 +11,33 @@ namespace HomelyzerUI.Common.HomelyzerClient;
 
 internal class HomelyzerClient : HttpClient, IMyHttpClient
 {
-    private UriBuilder AdvertsUriBuilder { get; set; }
-    public string Host { get; set; }
+    private UriBuilder HomelyzerUriBuilder { get; set; }
     public Uri GetAdvertUri { get; set; }
+    public string Host { get; set; }
 
     public HomelyzerClient()
     {
-        Host = "homelyzer.azurewebsites.net/api";
-
-        AdvertsUriBuilder = new UriBuilder();
-        AdvertsUriBuilder.Scheme = "https";
-        AdvertsUriBuilder.Host = Host;
+        HomelyzerUriBuilder = new UriBuilder();
+        HomelyzerUriBuilder.Scheme = "https";
+        HomelyzerUriBuilder.Host = "homelyzer.azurewebsites.net";
     }
 
     public async Task<HttpResponseMessage> GetAllAdvertsAsync()
     {
-        AdvertsUriBuilder.Path = "adverts";
-        return await this.GetAsync(AdvertsUriBuilder.Uri);
+        HomelyzerUriBuilder.Path = "api/adverts";
+        return await this.GetAsync(HomelyzerUriBuilder.Uri);
     }
 
     public async Task<HttpResponseMessage> GetAdvertAsync(int id)
     {
-        AdvertsUriBuilder.Path = $"adverts/{id.ToString()}";
-        return await this.GetAsync(AdvertsUriBuilder.Uri);
+        HomelyzerUriBuilder.Path = $"api/adverts/{id.ToString()}";
+        return await this.GetAsync(HomelyzerUriBuilder.Uri);
     }
 
     public async Task<HttpResponseMessage> UpdateAdvertAsync<T>(T data)
     {
-        AdvertsUriBuilder.Path = $"adverts/advert";
-        var x = await this.PutAsJsonAsync<T>(AdvertsUriBuilder.Uri, data);
+        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        var x = await this.PutAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
         return x;
     }
 
@@ -47,21 +45,22 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
     {
         var jsonData = JsonConvert.SerializeObject(data);
         var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        AdvertsUriBuilder.Path = $"adverts/advert/";
-        var x = await this.PutAsync(AdvertsUriBuilder.Uri, requestContent);
+
+        HomelyzerUriBuilder.Path = $"api/adverts/advert/";
+        var x = await this.PutAsync(HomelyzerUriBuilder.Uri, requestContent);
         return x;
     }
 
     public async Task<HttpResponseMessage> SaveAdvertAsync<T>(T data)
     {
-        AdvertsUriBuilder.Path = $"adverts/advert";
-        var x = await this.PostAsJsonAsync<T>(AdvertsUriBuilder.Uri, data);
+        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        var x = await this.PostAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
         return x;
     }
 
     public async Task<HttpResponseMessage> GetAllOwnersAsync()
     {
-        AdvertsUriBuilder.Path = "owners";
-        return await GetAsync(AdvertsUriBuilder.Uri);
+        HomelyzerUriBuilder.Path = "api/owners";
+        return await GetAsync(HomelyzerUriBuilder.Uri);
     }
 }

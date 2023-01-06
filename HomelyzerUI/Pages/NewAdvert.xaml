@@ -101,9 +101,18 @@
             <Picker
                 ItemsSource="{Binding Owners}"
                 ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedOwner}"
+            />
+            <Entry
+                Text="{Binding NewAd.OwnerName, Mode=OneWayToSource}"
+            />
+            <Entry
+                Text="{Binding NewAd.EmailContact, Mode=OneWayToSource}"
+            />
+            <Entry
+                Text="{Binding NewAd.PhoneContact, Mode=OneWayToSource}"
             />
 
-            
 
             <Button
                 Command="{Binding PeekValuesCommand}"

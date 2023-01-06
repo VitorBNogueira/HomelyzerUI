@@ -96,9 +96,12 @@ public partial class AdvertDetailsVM : ObservableObject
     [RelayCommand]
     public async Task SaveChangesAsync()
     {
-        Advert.PersonalNotes = Advert.PersonalNotes ?? string.Empty;
-        Advert.Url = Advert.Url ?? string.Empty;
-        Advert.Area = Advert.Area ?? string.Empty;
-        _ = await _httpClient.UpdateAdvertAltAsync(Advert);
+        if (Advert != null)
+        {
+            Advert.PersonalNotes = Advert.PersonalNotes ?? string.Empty;
+            Advert.Url = Advert.Url ?? string.Empty;
+            Advert.Area = Advert.Area ?? string.Empty;
+            _ = await _httpClient.UpdateAdvertAsync(Advert);
+        }
     }
 }

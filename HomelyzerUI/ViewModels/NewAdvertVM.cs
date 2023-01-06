@@ -22,6 +22,9 @@ public partial class NewAdvertVM : ObservableObject
     [ObservableProperty]
     public List<OwnerDTO> _owners;
 
+    [ObservableProperty]
+    public OwnerDTO _selectedOwner;
+
     public List<string> Types
     {
         get
@@ -79,6 +82,7 @@ public partial class NewAdvertVM : ObservableObject
     public async Task PeekValues()
     {
         var x = NewAd;
+        var q = SelectedOwner;
         var z = x;
     }
 }
