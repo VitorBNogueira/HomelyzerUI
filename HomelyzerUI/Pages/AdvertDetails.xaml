@@ -6,9 +6,26 @@
              x:DataType="viewmodels:AdvertDetailsVM"
              Title="AdvertDetails">
 
-    <Grid>
+    <Grid
+        BackgroundColor="#ACB8C3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.6*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        
+        
         <!--ExpandedPicture-->
         <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="2"
+            
             IsVisible="{Binding ImageIsVisible}"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
@@ -27,15 +44,83 @@
                 />
             </Image.Source>
         </Image>
+        
+        <!--DateTimePickers-->
+        <DatePicker
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Date="{Binding AdDate, Mode=TwoWay}"
+            
+            FontSize="50"
+            TextColor="Black"
+            
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+        />
+        <TimePicker
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Time="{Binding AdTime, Mode=TwoWay}"
+            
+            FontSize="50"
+            TextColor="Black"
+            
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+        />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Text="Cancel"
+            
+            FontSize="25"
+            
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= CloseDateTimeCommand}"
+            CommandParameter="false"
+            
+            VerticalOptions="Center"
+        />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Text="Save Date"
+            
+            FontSize="25"
+            
+            VerticalOptions="Center"
+            
+            
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= CloseDateTimeCommand}"
+            CommandParameter="true"
+            
+        />
+        
 
         <RefreshView
             IsVisible="{Binding ViewIsVisible}"
             
             Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
             
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding LoadAdvertCommand}"
-            >
+        >
             <Grid
             BackgroundColor="WhiteSmoke"
             Grid.Row="0">
@@ -115,7 +200,8 @@
                         <RowDefinition Height="AUTO"/>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="280"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="260"/>
                         <RowDefinition Height="17"/>
                         <RowDefinition Height="AUTO"/>
                     </Grid.RowDefinitions>
@@ -280,8 +366,38 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <ScrollView
+                    <!--Meeting Date and Time-->
+                    <Label
+                        Grid.Column="0"
                         Grid.Row="6"
+                        Grid.ColumnSpan="1"
+                        
+                        Text="Meeting:"
+                        
+                        FontSize="17"
+                        
+                        BackgroundColor="#E1E1E1"
+                    />
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="3"
+                        
+                        Text="{Binding AdDateTime}"
+                        
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                    >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                        Path= SetDateTimeCommand}"
+                                        />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ScrollView
+                        Grid.Row="7"
                         Grid.Column="0"
                         Grid.ColumnSpan="4">
                         <StackLayout>
@@ -294,6 +410,7 @@
                                 LineBreakMode="WordWrap"
                     
                                 TextColor="Black"
+                                BackgroundColor="White"
                                 FontSize="17"
                             />
 
@@ -314,7 +431,7 @@
 
                     <!--Go to Original Advert-->
                     <Button 
-                        Grid.Row="7"
+                        Grid.Row="8"
                         Grid.RowSpan="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="1"
@@ -328,7 +445,7 @@
 
                     <!--Save-->
                     <Button 
-                        Grid.Row="7"
+                        Grid.Row="8"
                         Grid.RowSpan="2"
                         Grid.Column="1"
                         Grid.ColumnSpan="3"

@@ -29,9 +29,22 @@ public partial class AdvertDetailsVM : ObservableObject
     public bool imageIsVisible = false;
     [ObservableProperty]
     public bool viewIsVisible = true;
+    [ObservableProperty]
+    public bool dateTimePickersAreVisible = false;
 
     [ObservableProperty]
     public string expandedPicture;
+
+    // Meeting Date
+    [ObservableProperty]
+    public DateTime _adDate;
+    // Meeting Time of Day
+    [ObservableProperty]
+    public TimeSpan _adTime;
+
+    // Displays meeting time if there is one 
+    [ObservableProperty]
+    public string _adDateTime;
 
     private readonly IMyHttpClient _httpClient;
 
@@ -49,11 +62,18 @@ public partial class AdvertDetailsVM : ObservableObject
             var result = await _httpClient.GetAdvertAsync(AdvertId);
 
             Advert = JsonConvert.DeserializeObject<AdvertDTO>(await result.Content.ReadAsStringAsync());
+
+            UpdateDisplayMeetingDate();
         }
         finally
         {
             IsRefreshing = false;
         }
+    }
+
+    private void UpdateDisplayMeetingDate()
+    {
+        AdDateTime = Advert.MeetingTime != null ? Advert.MeetingTime?.ToString("HH:mm, dddd, dd MMMM yyyy") : "Not yet scheduled";
     }
 
     [RelayCommand]
@@ -62,6 +82,26 @@ public partial class AdvertDetailsVM : ObservableObject
         ExpandedPicture= url;
         ViewIsVisible= false;
         ImageIsVisible= true;
+    }
+
+    [RelayCommand]
+    public void SetDateTime()
+    {
+        ViewIsVisible = false;
+        DateTimePickersAreVisible = true;
+    }
+
+    [RelayCommand]
+    public void CloseDateTime(string save)
+    {
+        ViewIsVisible = true;
+        DateTimePickersAreVisible = false;
+
+        if (save == "true")
+        {
+            Advert.MeetingTime = AdDate.Add(AdTime);
+            UpdateDisplayMeetingDate();
+        }
     }
 
     [RelayCommand]
@@ -98,9 +138,10 @@ public partial class AdvertDetailsVM : ObservableObject
     {
         if (Advert != null)
         {
-            Advert.PersonalNotes = Advert.PersonalNotes ?? string.Empty;
-            Advert.Url = Advert.Url ?? string.Empty;
-            Advert.Area = Advert.Area ?? string.Empty;
+            //Advert.PersonalNotes = Advert.PersonalNotes ?? string.Empty;
+            //Advert.Url = Advert.Url ?? string.Empty;
+            //Advert.Area = Advert.Area ?? string.Empty;
+
             _ = await _httpClient.UpdateAdvertAsync(Advert);
         }
     }
