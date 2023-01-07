@@ -76,9 +76,15 @@
             <Label 
                 Text="Meeting Time"
             />
-            <Entry
-                Text="{Binding NewAd.MeetingTime, Mode=OneWayToSource}"
-            />
+            <HorizontalStackLayout>
+                <DatePicker
+                    Date="{Binding AdDate, Mode=TwoWay}"
+                />
+                <TimePicker
+                    Time="{Binding AdTime, Mode=TwoWay}"
+                />
+            </HorizontalStackLayout>
+            
 
             <!--Includes Bills-->
             <StackLayout
@@ -101,21 +107,64 @@
             <Picker
                 ItemsSource="{Binding Owners}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedOwner}"
+                SelectedItem="{Binding SelectedOwner, Mode=OneWayToSource}"
+            />
+            <Label 
+                Text="Name"
+                
+                Padding="20, 0, 0, 0"
             />
             <Entry
-                Text="{Binding NewAd.OwnerName, Mode=OneWayToSource}"
+                Text="{Binding SelectedOwner.Name, Mode=TwoWay}"
+            />
+            
+            <Label 
+                Text="Email"
+                
+                Padding="20, 0, 0, 0"
             />
             <Entry
-                Text="{Binding NewAd.EmailContact, Mode=OneWayToSource}"
+                Text="{Binding SelectedOwner.EmailContact, Mode=TwoWay}"
+            />
+            
+            <Label 
+                Text="Phone"
+                
+                Padding="20, 0, 0, 0"
             />
             <Entry
-                Text="{Binding NewAd.PhoneContact, Mode=OneWayToSource}"
+                Text="{Binding SelectedOwner.PhoneContact, Mode=TwoWay}"
             />
 
+            <!--Pictures-->
+            <Label 
+                Text="Pictures (Separate by space)"
+            />
+            <Editor
+                Text="{Binding AllPictures, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Url-->
+            <Label 
+                Text="Original Advert Url"
+            />
+            <Entry
+                Text="{Binding NewAd.Url, Mode=OneWayToSource}"
+            />
+
+            <!--Score-->
+            <Label 
+                Text="Score"
+            />
+            <Entry
+                Text="{Binding NewAd.Score, Mode=OneWayToSource}"
+                Keyboard="Telephone"
+            />
 
             <Button
-                Command="{Binding PeekValuesCommand}"
+                Text="Save"
+                Command="{Binding SaveAdvertCommand}"
                 />
         </StackLayout>
     </ScrollView>

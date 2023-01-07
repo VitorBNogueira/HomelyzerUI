@@ -9,6 +9,7 @@ namespace HomelyzerUI.Common.HomelyzerClient
         Task<HttpResponseMessage> UpdateAdvertAsync<T>(T advert);
         Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO advert);
         Task<HttpResponseMessage> SaveAdvertAsync<T>(T data);
+        Task<HttpResponseMessage> SaveAdvertAltAsync(AdvertDTO advert);
         Task<HttpResponseMessage> GetAllOwnersAsync();
 
 

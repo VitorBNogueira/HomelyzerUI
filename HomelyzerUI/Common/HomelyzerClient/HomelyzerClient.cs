@@ -58,6 +58,16 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         return x;
     }
 
+    public async Task<HttpResponseMessage> SaveAdvertAltAsync(AdvertDTO data)
+    {
+        var jsonData = JsonConvert.SerializeObject(data);
+        var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        var x = await this.PostAsync(HomelyzerUriBuilder.Uri, requestContent);
+        return x;
+    }
+
     public async Task<HttpResponseMessage> GetAllOwnersAsync()
     {
         HomelyzerUriBuilder.Path = "api/owners";

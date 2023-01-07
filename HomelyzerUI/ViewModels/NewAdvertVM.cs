@@ -19,12 +19,23 @@ public partial class NewAdvertVM : ObservableObject
     [ObservableProperty]
     public AdvertDTO _newAd;
 
+    // Saves all the pictures in a single string to be split and inserted in the list on saving
+    [ObservableProperty]
+    public string _allPictures;
+
     [ObservableProperty]
     public List<OwnerDTO> _owners;
 
     [ObservableProperty]
-    public OwnerDTO _selectedOwner;
+    public OwnerDTO? _selectedOwner;
 
+    [ObservableProperty]
+    public DateTime _adDate;
+
+    [ObservableProperty]
+    public TimeSpan _adTime;
+
+    // List of AdvertTypes in the EAdvertType enum, to display in the picker
     public List<string> Types
     {
         get
@@ -32,14 +43,6 @@ public partial class NewAdvertVM : ObservableObject
             return Enum.GetNames(typeof(EAdvertType)).ToList();
         }
     }
-
-    //public List<string> Owners
-    //{
-    //    get
-    //    {
-    //        return Enum.GetNames(typeof(EAdvertType)).ToList();
-    //    }
-    //}
 
     private readonly IMyHttpClient _httpClient;
 
@@ -49,15 +52,29 @@ public partial class NewAdvertVM : ObservableObject
         NewAd = new AdvertDTO();
         NewAd.Type = EAdvertType.Rent;
 
+        // If date is older than current day, it will save as empty
+        AdDate = DateTime.Now.AddDays(-1);
+
         LoadOwnersAsync();
     }
 
     [RelayCommand]
     public async Task SaveAdvertAsync()
     {
+        NewAd.EmailContact = SelectedOwner?.EmailContact ?? "";
+        NewAd.PhoneContact = SelectedOwner?.PhoneContact ?? "";
+        NewAd.OwnerName = SelectedOwner?.Name ?? "";
+        NewAd.Pictures = AllPictures?.Trim().Split(' ').ToList();
+        NewAd.MeetingTime = AdDate < DateTime.Today ? null : AdDate.Date.Add(AdTime);
+
         try
         {
-            var result = await _httpClient.GetAllAdvertsAsync();
+            var result = await _httpClient.SaveAdvertAsync(NewAd);
+            var x = 0;
+        }
+        catch
+        {
+
         }
         finally
         {
@@ -83,6 +100,7 @@ public partial class NewAdvertVM : ObservableObject
     {
         var x = NewAd;
         var q = SelectedOwner;
+        var w = AllPictures;
         var z = x;
     }
 }
