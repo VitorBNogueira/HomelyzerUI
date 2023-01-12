@@ -142,7 +142,7 @@ public partial class AdvertDetailsVM : ObservableObject
             //Advert.Url = Advert.Url ?? string.Empty;
             //Advert.Area = Advert.Area ?? string.Empty;
 
-            _ = await _httpClient.UpdateAdvertAsync(Advert);
+            _ = await _httpClient.UpdateAdvertAsync(Advert, Advert.AdvertId);
         }
     }
 }

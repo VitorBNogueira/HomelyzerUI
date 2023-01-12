@@ -9,8 +9,8 @@
     <ScrollView
         >
         <StackLayout
-            Padding="0, 50, 0, 0"
-            BackgroundColor="#A07493"
+            Padding="0, 30, 0, 0"
+            BackgroundColor="#E1DFE0"
             >
             
             <!--Ad Name-->

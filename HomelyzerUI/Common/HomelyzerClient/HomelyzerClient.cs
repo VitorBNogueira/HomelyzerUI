@@ -34,26 +34,26 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         return await this.GetAsync(HomelyzerUriBuilder.Uri);
     }
 
-    public async Task<HttpResponseMessage> UpdateAdvertAsync<T>(T data)
+    public async Task<HttpResponseMessage> UpdateAdvertAsync<T>(T data, int Id)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        HomelyzerUriBuilder.Path = $"api/adverts/" + Id.ToString();
         var x = await this.PutAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
         return x;
     }
 
-    public async Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO data)
+    public async Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO data, int Id)
     {
         var jsonData = JsonConvert.SerializeObject(data);
         var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        HomelyzerUriBuilder.Path = $"api/adverts/advert/";
+        HomelyzerUriBuilder.Path = $"api/adverts/" + Id.ToString();
         var x = await this.PutAsync(HomelyzerUriBuilder.Uri, requestContent);
         return x;
     }
 
     public async Task<HttpResponseMessage> SaveAdvertAsync<T>(T data)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        HomelyzerUriBuilder.Path = $"api/adverts";
         var x = await this.PostAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
         return x;
     }
@@ -63,7 +63,7 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         var jsonData = JsonConvert.SerializeObject(data);
         var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        HomelyzerUriBuilder.Path = $"api/adverts/advert";
+        HomelyzerUriBuilder.Path = $"api/adverts";
         var x = await this.PostAsync(HomelyzerUriBuilder.Uri, requestContent);
         return x;
     }

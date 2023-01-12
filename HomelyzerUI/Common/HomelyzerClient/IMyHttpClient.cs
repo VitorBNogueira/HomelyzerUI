@@ -6,8 +6,8 @@ namespace HomelyzerUI.Common.HomelyzerClient
     {
         Task<HttpResponseMessage> GetAllAdvertsAsync();
         Task<HttpResponseMessage> GetAdvertAsync(int Id);
-        Task<HttpResponseMessage> UpdateAdvertAsync<T>(T advert);
-        Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO advert);
+        Task<HttpResponseMessage> UpdateAdvertAsync<T>(T advert, int Id);
+        Task<HttpResponseMessage> UpdateAdvertAltAsync(AdvertDTO advert, int Id);
         Task<HttpResponseMessage> SaveAdvertAsync<T>(T data);
         Task<HttpResponseMessage> SaveAdvertAltAsync(AdvertDTO advert);
         Task<HttpResponseMessage> GetAllOwnersAsync();
