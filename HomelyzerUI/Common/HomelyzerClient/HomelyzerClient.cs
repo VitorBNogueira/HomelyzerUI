@@ -73,4 +73,11 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         HomelyzerUriBuilder.Path = "api/owners";
         return await GetAsync(HomelyzerUriBuilder.Uri);
     }
+
+    public async Task<HttpResponseMessage> ToggleAdvertAsync(bool enable, int id)
+    {
+        HomelyzerUriBuilder.Path = $"api/adverts/toggle/{id.ToString()}";
+        var x = await this.PostAsJsonAsync<bool>(HomelyzerUriBuilder.Uri, enable);
+        return x;
+    }
 }

@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
@@ -115,8 +117,13 @@ public partial class AdvertDetailsVM : ObservableObject
     [RelayCommand]
     public void OpenMaps()
     {
-        var enc = HttpUtility.UrlEncode(Advert.Address);
-        Launcher.OpenAsync($"https://www.google.com/maps/search/?api=1&query={enc}");
+        if (!string.IsNullOrWhiteSpace(Advert.Address))
+        {
+            var enc = HttpUtility.UrlEncode(Advert.Address);
+            Launcher.OpenAsync($"https://www.google.com/maps/search/?api=1&query={enc}");
+        }
+        else
+            Toast.Make("Invalid address", ToastDuration.Short).Show();
     }
 
     [RelayCommand]
@@ -124,13 +131,17 @@ public partial class AdvertDetailsVM : ObservableObject
     {
         if (Uri.IsWellFormedUriString(Advert.Url, UriKind.Absolute))
             Launcher.OpenAsync(Advert.Url);
+        else
+            Toast.Make("Invalid Uri", ToastDuration.Short).Show();
     }
 
     [RelayCommand]
     public void PhoneCall()
     {
-        if (PhoneDialer.Default.IsSupported)
+        if (!string.IsNullOrWhiteSpace(Advert.PhoneContact) && PhoneDialer.Default.IsSupported)
             PhoneDialer.Default.Open(Advert.PhoneContact);
+        else
+            Toast.Make("Invalid number", ToastDuration.Short).Show();
     }
 
     [RelayCommand]
@@ -142,7 +153,12 @@ public partial class AdvertDetailsVM : ObservableObject
             //Advert.Url = Advert.Url ?? string.Empty;
             //Advert.Area = Advert.Area ?? string.Empty;
 
-            _ = await _httpClient.UpdateAdvertAsync(Advert, Advert.AdvertId);
+            var result = await _httpClient.UpdateAdvertAsync(Advert, Advert.AdvertId);
+
+            if (result.IsSuccessStatusCode)
+                Toast.Make("Saved!", ToastDuration.Short).Show();
+            else
+                Toast.Make("Couldn't save...", ToastDuration.Short).Show();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
@@ -70,11 +72,15 @@ public partial class NewAdvertVM : ObservableObject
         try
         {
             var result = await _httpClient.SaveAdvertAsync(NewAd);
-            var x = 0;
+
+            if (result.IsSuccessStatusCode)
+                Toast.Make("Advert Added!", ToastDuration.Short).Show();
+            else
+                Toast.Make("Couldn't add Advert", ToastDuration.Short).Show();
         }
         catch
         {
-
+            Toast.Make("Something went wrong", ToastDuration.Short).Show();
         }
         finally
         {

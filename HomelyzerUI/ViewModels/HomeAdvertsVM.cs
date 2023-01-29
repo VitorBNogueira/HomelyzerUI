@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
 using HomelyzerUI.Pages;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Core;
 
 namespace HomelyzerUI.ViewModels;
 
@@ -28,7 +30,6 @@ public partial class HomeAdvertsVM : ObservableObject
     public HomeAdvertsVM(IMyHttpClient httpClient)
     {
         this._httpClient = httpClient;
-        IsRefreshing = true;
         LoadAdvertsAsync();
     }
 
@@ -37,6 +38,7 @@ public partial class HomeAdvertsVM : ObservableObject
     {
         try
         {
+            IsRefreshing = true;
             var result = await _httpClient.GetAllAdvertsAsync();
 
             Adverts = JsonConvert.DeserializeObject<List<AdvertDTO>>(await result.Content.ReadAsStringAsync());
@@ -62,7 +64,25 @@ public partial class HomeAdvertsVM : ObservableObject
     [RelayCommand]
     public void PhoneCall(string number)
     {
-        if (PhoneDialer.Default.IsSupported)
+        if (!string.IsNullOrWhiteSpace(number) && PhoneDialer.Default.IsSupported)
             PhoneDialer.Default.Open(number);
+        else
+            Toast.Make("Invalid number", ToastDuration.Short).Show();
+    }
+
+    [RelayCommand]
+    public async void DisableAd(int id)
+    {
+        var result = await _httpClient.ToggleAdvertAsync(false, id);
+
+        if (result.IsSuccessStatusCode)
+        {
+            LoadAdvertsAsync();
+            Toast.Make("Advert Removed!", ToastDuration.Short).Show();
+        }
+        else
+        {
+            Toast.Make("Couldn't remove Advert", ToastDuration.Short).Show();
+        }
     }
 }

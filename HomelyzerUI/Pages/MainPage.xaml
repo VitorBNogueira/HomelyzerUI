@@ -50,11 +50,19 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid.GestureRecognizers>
+                                    <SwipeGestureRecognizer
+                                        Direction="Left"
+                                        Threshold="20"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                        Path= DisableAdCommand}"
+                                        CommandParameter="{Binding AdvertId}"
+                                        />
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
                                         Path= GetAdvertDetailsPageCommand}"
                                         CommandParameter="{Binding AdvertId}"
                                         />
+                                    
                                 </Grid.GestureRecognizers>
 
                                 <!-- Picture -->
