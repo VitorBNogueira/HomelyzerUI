@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Core;
+using HomelyzerUI.Models.Containers;
 
 namespace HomelyzerUI.ViewModels;
 
@@ -41,7 +42,7 @@ public partial class HomeAdvertsVM : ObservableObject
             IsRefreshing = true;
             var result = await _httpClient.GetAllAdvertsAsync();
 
-            Adverts = JsonConvert.DeserializeObject<List<AdvertDTO>>(await result.Content.ReadAsStringAsync());
+            Adverts = JsonConvert.DeserializeObject<AdvertJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Adverts;
         }
         finally
         {

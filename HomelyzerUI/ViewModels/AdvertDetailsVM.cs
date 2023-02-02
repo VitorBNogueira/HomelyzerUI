@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
+using HomelyzerUI.Models.Containers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ public partial class AdvertDetailsVM : ObservableObject
         {
             var result = await _httpClient.GetAdvertAsync(AdvertId);
 
-            Advert = JsonConvert.DeserializeObject<AdvertDTO>(await result.Content.ReadAsStringAsync());
+            Advert = JsonConvert.DeserializeObject<AdvertJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Advert;
 
             UpdateDisplayMeetingDate();
         }

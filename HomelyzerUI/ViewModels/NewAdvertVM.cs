@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HomelyzerUI.Common.HomelyzerClient;
 using HomelyzerUI.Models;
+using HomelyzerUI.Models.Containers;
 using HomelyzerUI.Models.Enums;
 using HomelyzerUI.Pages;
 using Newtonsoft.Json;
@@ -94,7 +95,7 @@ public partial class NewAdvertVM : ObservableObject
         {
             var result = await _httpClient.GetAllOwnersAsync();
 
-            Owners = JsonConvert.DeserializeObject<List<OwnerDTO>>(await result.Content.ReadAsStringAsync());
+            Owners = JsonConvert.DeserializeObject<OwnersJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Owners;
         }
         finally
         {
