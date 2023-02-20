@@ -22,10 +22,13 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         HomelyzerUriBuilder.Host = "homelyzer.azurewebsites.net";
     }
 
-    public async Task<HttpResponseMessage> GetAllAdvertsAsync()
+    public async Task<HttpResponseMessage> GetAllAdvertsAsync(string sortBy, EDirection direction)
     {
         HomelyzerUriBuilder.Path = "api/adverts";
-        return await this.GetAsync(HomelyzerUriBuilder.Uri);
+        HomelyzerUriBuilder.Query = $"sort={sortBy}";
+        HomelyzerUriBuilder.Query += $"&direction={(int)direction}";
+        var result = await this.GetAsync(HomelyzerUriBuilder.Uri);
+        return result;
     }
 
     public async Task<HttpResponseMessage> GetAdvertAsync(int id)

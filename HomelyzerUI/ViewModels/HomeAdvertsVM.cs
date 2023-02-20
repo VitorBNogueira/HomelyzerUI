@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Core;
 using HomelyzerUI.Models.Containers;
+using HomelyzerUI.Common;
 
 namespace HomelyzerUI.ViewModels;
 
@@ -40,9 +41,9 @@ public partial class HomeAdvertsVM : ObservableObject
         try
         {
             IsRefreshing = true;
-            var result = await _httpClient.GetAllAdvertsAsync();
+            var result = await _httpClient.GetAllAdvertsAsync("MeetingTime", EDirection.Asc);
 
-            Adverts = JsonConvert.DeserializeObject<AdvertJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Adverts;
+            Adverts = JsonConvert.DeserializeObject<AdvertsJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Adverts;
         }
         finally
         {

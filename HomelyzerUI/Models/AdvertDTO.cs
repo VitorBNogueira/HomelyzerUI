@@ -26,6 +26,8 @@ public sealed class AdvertDTO
     public List<string>? Pictures { get; set; }
     public string Url { get; set; }
     public double? Score { get; set; }
+    public bool IsActive { get; set; }
+
 
     // owner
     public string OwnerName { get; set; }

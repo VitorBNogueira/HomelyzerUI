@@ -55,6 +55,8 @@ public partial class NewAdvertVM : ObservableObject
         NewAd = new AdvertDTO();
         NewAd.Type = EAdvertType.Rent;
 
+        SelectedOwner = new OwnerDTO();
+
         // If date is older than current day, it will save as empty
         AdDate = DateTime.Now.AddDays(-1);
 
@@ -69,10 +71,11 @@ public partial class NewAdvertVM : ObservableObject
         NewAd.OwnerName = SelectedOwner?.Name ?? "";
         NewAd.Pictures = AllPictures?.Trim().Split(' ').ToList();
         NewAd.MeetingTime = AdDate < DateTime.Today ? null : AdDate.Date.Add(AdTime);
+        NewAd.IsActive = true;
 
         try
         {
-            var result = await _httpClient.SaveAdvertAsync(NewAd);
+            var result = await _httpClient.SaveAdvertAltAsync(NewAd);
 
             if (result.IsSuccessStatusCode)
                 Toast.Make("Advert Added!", ToastDuration.Short).Show();
@@ -95,7 +98,15 @@ public partial class NewAdvertVM : ObservableObject
         {
             var result = await _httpClient.GetAllOwnersAsync();
 
-            Owners = JsonConvert.DeserializeObject<OwnersJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Owners;
+            Owners = new List<OwnerDTO>
+            {
+                new OwnerDTO
+                {
+                    Name = "New"
+                }
+            };
+
+            Owners.AddRange(JsonConvert.DeserializeObject<OwnersJSONContainerDTO>(await result.Content.ReadAsStringAsync()).Owners);
         }
         finally
         {
