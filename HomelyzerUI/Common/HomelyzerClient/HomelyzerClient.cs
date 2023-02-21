@@ -24,23 +24,21 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
 
     public async Task<HttpResponseMessage> GetAllAdvertsAsync(string sortBy, EDirection direction)
     {
-        HomelyzerUriBuilder.Path = "api/adverts";
-        HomelyzerUriBuilder.Query = $"sort={sortBy}";
-        HomelyzerUriBuilder.Query += $"&direction={(int)direction}";
-        var result = await this.GetAsync(HomelyzerUriBuilder.Uri);
+        var uri = BuildUri("api/adverts", query: $"sort={sortBy}&direction={(int)direction}");
+        var result = await this.GetAsync(uri);
         return result;
     }
 
     public async Task<HttpResponseMessage> GetAdvertAsync(int id)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts/{id.ToString()}";
-        return await this.GetAsync(HomelyzerUriBuilder.Uri);
+        var uri = BuildUri($"api/adverts/{id.ToString()}");
+        return await this.GetAsync(uri);
     }
 
     public async Task<HttpResponseMessage> UpdateAdvertAsync<T>(T data, int Id)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts/" + Id.ToString();
-        var x = await this.PutAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
+        var uri = BuildUri($"api/adverts/{Id.ToString()}");
+        var x = await this.PutAsJsonAsync<T>(uri, data);
         return x;
     }
 
@@ -49,15 +47,15 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         var jsonData = JsonConvert.SerializeObject(data);
         var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        HomelyzerUriBuilder.Path = $"api/adverts/" + Id.ToString();
-        var x = await this.PutAsync(HomelyzerUriBuilder.Uri, requestContent);
+        var uri = BuildUri($"api/adverts/{Id}");
+        var x = await this.PutAsync(uri, requestContent);
         return x;
     }
 
     public async Task<HttpResponseMessage> SaveAdvertAsync<T>(T data)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts";
-        var x = await this.PostAsJsonAsync<T>(HomelyzerUriBuilder.Uri, data);
+        var uri = BuildUri($"api/adverts");
+        var x = await this.PostAsJsonAsync<T>(uri, data);
         return x;
     }
 
@@ -66,21 +64,31 @@ internal class HomelyzerClient : HttpClient, IMyHttpClient
         var jsonData = JsonConvert.SerializeObject(data);
         var requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        HomelyzerUriBuilder.Path = $"api/adverts";
-        var x = await this.PostAsync(HomelyzerUriBuilder.Uri, requestContent);
+        var uri = BuildUri($"api/adverts");
+        var x = await this.PostAsync(uri, requestContent);
         return x;
     }
 
     public async Task<HttpResponseMessage> GetAllOwnersAsync()
     {
-        HomelyzerUriBuilder.Path = "api/owners";
-        return await GetAsync(HomelyzerUriBuilder.Uri);
+        var uri = BuildUri($"api/owners");
+        return await GetAsync(uri);
     }
 
     public async Task<HttpResponseMessage> ToggleAdvertAsync(bool enable, int id)
     {
-        HomelyzerUriBuilder.Path = $"api/adverts/toggle/{id.ToString()}";
-        var x = await this.PostAsJsonAsync<bool>(HomelyzerUriBuilder.Uri, enable);
+        var uri = BuildUri($"api/adverts/toggle/{id.ToString()}");
+        var x = await this.PostAsJsonAsync<bool>(uri, enable); 
+
         return x;
+    }
+
+    private Uri BuildUri(string path, string query = "", string scheme = "https", string host = "homelyzer.azurewebsites.net")
+    {
+        var uriBuilder = new UriBuilder(scheme, host);
+        uriBuilder.Path = path;
+        uriBuilder.Query = query;
+
+        return uriBuilder.Uri;
     }
 }
