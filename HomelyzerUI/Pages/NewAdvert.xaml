@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomelyzerUI.Pages.NewAdvert"
+             xmlns:viewmodels="clr-namespace:HomelyzerUI.ViewModels"
+             xmlns:models="clr-namespace:HomelyzerUI.Models"
+             x:DataType="viewmodels:NewAdvertVM"
+             Title="NewAdvert">
+    <ScrollView
+        >
+        <StackLayout
+            Padding="0, 30, 0, 0"
+            BackgroundColor="#E1DFE0"
+            >
+            
+            <!--Ad Name-->
+            <Label 
+                Text="Name"
+            />
+            <Entry
+                Text="{Binding NewAd.Name, Mode=OneWayToSource}"
+            />
+
+            <!--Address-->
+            <Label 
+                Text="Address"
+            />
+            <Entry
+                Text="{Binding NewAd.Address, Mode=OneWayToSource}"
+            />
+
+            <!--Area-->
+            <Label 
+                Text="Area"
+            />
+            <Entry
+                Text="{Binding NewAd.Area, Mode=OneWayToSource}"
+            />
+
+            <!--Price-->
+            <Label 
+                Text="Price"
+            />
+            <Entry
+                Text="{Binding NewAd.Price, Mode=OneWayToSource}"
+            />
+
+            <!--Type-->
+            <Label 
+                Text="Type"
+            />
+            <Picker
+                ItemsSource="{Binding Types}"
+                SelectedIndex="{Binding NewAd.Type, Mode=TwoWay, Converter= {StaticResource TypeConverter}}"
+            />
+
+            <!--Description-->
+            <Label 
+                Text="Description"
+            />
+            <Editor
+                Text="{Binding NewAd.Description, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Personal Notes-->
+            <Label 
+                Text="Personal Notes"
+            />
+            <Editor
+                Text="{Binding NewAd.PersonalNotes, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Meeting Time-->
+            <Label 
+                Text="Meeting Time"
+            />
+            <HorizontalStackLayout>
+                <DatePicker
+                    Date="{Binding AdDate, Mode=TwoWay}"
+                />
+                <TimePicker
+                    Time="{Binding AdTime, Mode=TwoWay}"
+                />
+            </HorizontalStackLayout>
+            
+
+            <!--Includes Bills-->
+            <StackLayout
+                Orientation="Horizontal">
+                <Label 
+                    Text="Includes Bills"
+                />
+                <Switch
+                    IsToggled="{Binding NewAd.IncludesBills, Mode=OneWayToSource}"
+                
+                    HorizontalOptions="EndAndExpand"
+                />
+            </StackLayout>
+
+
+            <!--Owner-->
+            <Label 
+                Text="Owner"
+            />
+            <Picker
+                ItemsSource="{Binding Owners}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedOwner, Mode=OneWayToSource}"
+            />
+            <Label 
+                Text="Name"
+                
+                Padding="20, 0, 0, 0"
+            />
+            <Entry
+                Text="{Binding SelectedOwner.Name, Mode=TwoWay}"
+            />
+            
+            <Label 
+                Text="Email"
+                
+                Padding="20, 0, 0, 0"
+            />
+            <Entry
+                Text="{Binding SelectedOwner.EmailContact, Mode=TwoWay}"
+            />
+            
+            <Label 
+                Text="Phone"
+                
+                Padding="20, 0, 0, 0"
+            />
+            <Entry
+                Text="{Binding SelectedOwner.PhoneContact, Mode=TwoWay}"
+            />
+
+            <!--Pictures-->
+            <Label 
+                Text="Pictures (Separate by space)"
+            />
+            <Editor
+                Text="{Binding AllPictures, Mode=OneWayToSource}"
+                AutoSize="TextChanges"
+            />
+
+            <!--Url-->
+            <Label 
+                Text="Original Advert Url"
+            />
+            <Entry
+                Text="{Binding NewAd.Url, Mode=OneWayToSource}"
+            />
+
+            <!--Score-->
+            <Label 
+                Text="Score"
+            />
+            <Entry
+                Text="{Binding NewAd.Score, Mode=OneWayToSource}"
+                Keyboard="Telephone"
+            />
+
+            <Button
+                Text="Save"
+                Command="{Binding SaveAdvertCommand}"
+                />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

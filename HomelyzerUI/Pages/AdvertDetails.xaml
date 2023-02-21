@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:HomelyzerUI.ViewModels"
+             x:Class="HomelyzerUI.Pages.AdvertDetails"
+             x:DataType="viewmodels:AdvertDetailsVM"
+             Title="AdvertDetails">
+
+    <Grid
+        BackgroundColor="#ACB8C3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.6*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        
+        
+        <!--ExpandedPicture-->
+        <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="2"
+            
+            IsVisible="{Binding ImageIsVisible}"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            >
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= BackToViewCommand}"
+                />
+            </Image.GestureRecognizers>
+            <Image.Source>
+                <UriImageSource 
+                    Uri="{Binding ExpandedPicture}"
+                    CachingEnabled="True"
+                    CacheValidity="23:00:00.0"
+                />
+            </Image.Source>
+        </Image>
+        
+        <!--DateTimePickers-->
+        <DatePicker
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Date="{Binding AdDate, Mode=TwoWay}"
+            
+            FontSize="50"
+            TextColor="Black"
+            
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+        />
+        <TimePicker
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Time="{Binding AdTime, Mode=TwoWay}"
+            
+            FontSize="50"
+            TextColor="Black"
+            
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+        />
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Text="Cancel"
+            
+            FontSize="25"
+            
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= CloseDateTimeCommand}"
+            CommandParameter="false"
+            
+            VerticalOptions="Center"
+        />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            
+            IsVisible="{Binding DateTimePickersAreVisible}"
+            
+            Text="Save Date"
+            
+            FontSize="25"
+            
+            VerticalOptions="Center"
+            
+            
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                    Path= CloseDateTimeCommand}"
+            CommandParameter="true"
+            
+        />
+        
+
+        <RefreshView
+            IsVisible="{Binding ViewIsVisible}"
+            
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding LoadAdvertCommand}"
+        >
+            <Grid
+            BackgroundColor="WhiteSmoke"
+            Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="AUTO"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    
+
+                    <!--Pictures-->
+                    <CarouselView
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                    
+                        ItemsSource="{Binding Advert.Pictures}"
+                
+                        Loop="False">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Image>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                            Path= ExpandPictureCommand}"
+                                            CommandParameter="{Binding .}"
+                                        />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <UriImageSource 
+                                            Uri="{Binding .}"
+                                            CachingEnabled="True"
+                                            CacheValidity="23:00:00.0"
+                                        />
+                                    </Image.Source>
+                                </Image>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+
+                    <!--Score-->
+                    <Entry
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        
+                        Text="{Binding Advert.Score, Mode=TwoWay}"
+                        
+                        TextColor="White"
+                        FontSize="35"
+                        Keyboard="Telephone"
+                        
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        
+                        BackgroundColor="#5E5E5E"
+                    />
+                </Grid>
+                
+                <!--Info-->
+                <Grid
+                    Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="260"/>
+                        <RowDefinition Height="17"/>
+                        <RowDefinition Height="AUTO"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                        <ColumnDefinition Width="0.25*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Name-->
+                    <Label
+                        Grid.Row="0"
+                        Grid.RowSpan="1"
+                        Grid.ColumnSpan="4"
+                        
+                        VerticalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                    
+                        Text="{Binding Advert.Name}"
+                    
+                        TextColor="Black"
+                        FontSize="23"
+                        FontAttributes="Bold"
+                        
+                        BackgroundColor="#E1E1E1"
+                    />
+                    <!--Address-->
+                    <Label
+                        Grid.Row="1"
+                        Grid.ColumnSpan="4"
+                        
+                        Text="{Binding Advert.Address}"
+                        
+                        VerticalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                    
+                        TextColor="White"
+                        BackgroundColor="SlateGray"
+                        FontAttributes="Italic"
+                        FontSize="18"
+                    >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                    Path= OpenMapsCommand}"
+                                />
+                        </Label.GestureRecognizers>
+
+                    </Label>
+
+                    <!--Type-->
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                    
+                        Text="{Binding Advert.Type}"
+                    
+                        TextColor="White"
+                        
+                        BackgroundColor="#3A70A5"
+                    />
+
+                    <!--IncludesBills-->
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                    
+                        Text="{Binding Advert.IncludesBills, Converter= {StaticResource IncBillsConverter}}"
+                        
+                        HorizontalTextAlignment="End"
+                        
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        
+                        BackgroundColor="#3A70A5"
+                    />
+
+                    <!--Price-->
+                    <Label
+                        Grid.Row="4"
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
+                        Grid.Column="0"
+                    
+                        Text="{Binding Advert.Price}"
+                    
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        
+                        BackgroundColor="#FFB6C8D9"
+                    />
+
+                    <!--Area-->
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Grid.RowSpan="2"
+                        
+                        HorizontalTextAlignment="End"
+                    
+                        Text="{Binding Advert.Area}"
+                    
+                        TextColor="Black"
+                        FontSize="25"
+                    
+                        BackgroundColor="#FFB6C8D9"
+                    />
+
+                    <!--OwnerName-->
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                    
+                        HorizontalTextAlignment="End"
+                        Text="{Binding Advert.OwnerName}"
+                        FontAttributes="Bold"
+                    
+                        TextColor="White"
+                        
+                        BackgroundColor="#FF947EB6"
+                    />
+
+                    <!--OwnerEmail-->
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                    
+                        Text="{Binding Advert.EmailContact}"
+                    
+                        TextColor="Black"
+                        FontAttributes="Italic"
+                        FontSize="15"
+                        
+                        BackgroundColor="#FFB5ABC6"
+                    />
+
+                    <!--OwnerPhone-->
+                    <Label
+                        Grid.Column="2"
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                    
+                        Text="{Binding Advert.PhoneContact}"
+                        
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                    
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="23"
+                        BackgroundColor="#FFBDB6C9"
+                    >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                        Path= PhoneCallCommand}"
+                                        />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!--Meeting Date and Time-->
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="1"
+                        
+                        Text="Meeting:"
+                        
+                        FontSize="17"
+                        
+                        BackgroundColor="#E1E1E1"
+                    />
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="3"
+                        
+                        Text="{Binding AdDateTime}"
+                        
+                        FontSize="16"
+                        VerticalTextAlignment="Center"
+                    >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                                        Path= SetDateTimeCommand}"
+                                        />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ScrollView
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4">
+                        <StackLayout>
+                            <!--Description-->
+                            <Label
+                                Text="{Binding Advert.Description}"
+                                
+                                MinimumHeightRequest="150"
+                                
+                                LineBreakMode="WordWrap"
+                    
+                                TextColor="Black"
+                                BackgroundColor="White"
+                                FontSize="17"
+                            />
+
+                            <!--Personal Notes-->
+                            <Editor
+                                AutoSize="TextChanges"
+
+                                Text="{Binding Advert.PersonalNotes, Mode=TwoWay}"
+                        
+                                TextColor="Black"
+                                FontSize="17"
+                                
+                                BackgroundColor="#E7EAEF"
+                            >
+                            </Editor>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--Go to Original Advert-->
+                    <Button 
+                        Grid.Row="8"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+            
+                        Text="Original"
+                        FontSize="16"
+                        
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                        Path= GoToOriginalAdCommand}"
+                    />
+
+                    <!--Save-->
+                    <Button 
+                        Grid.Row="8"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+            
+                        Text="Save Changes"
+                        FontSize="25"
+                        
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AdvertDetailsVM}}, 
+                        Path= SaveChangesCommand}"
+                    />
+                </Grid>
+            </Grid>
+        </RefreshView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:HomelyzerUI.ViewModels"
+             xmlns:models="clr-namespace:HomelyzerUI.Models"
+             x:DataType="viewmodels:HomeAdvertsVM"
+             x:Class="HomelyzerUI.MainPage">
+
+    <Grid
+        BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="AUTO"/>
+        </Grid.RowDefinitions>
+
+        <!-- Homelyzer Banner-->
+        <HorizontalStackLayout>
+            <Label Text="  Home" TextColor="Black" FontSize="35" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+            <Label Text="lyzer" TextColor="PaleVioletRed" FontSize="35" VerticalTextAlignment="Center"/>
+        </HorizontalStackLayout>
+
+        <RefreshView
+            Grid.Row="1"
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding LoadAdvertsCommand}"
+            >
+
+            <!-- Scrollable Adverts -->
+            <CollectionView 
+                ItemsSource="{Binding Adverts}"
+                BackgroundColor="LightGray"
+                >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AdvertDTO">
+                        <Border MinimumHeightRequest="550"
+                            Stroke="white"
+                            StrokeThickness="5"
+                            Padding="10"
+                            BackgroundColor="White"
+                            >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="200"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.GestureRecognizers>
+                                    <SwipeGestureRecognizer
+                                        Direction="Left"
+                                        Threshold="20"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                        Path= DisableAdCommand}"
+                                        CommandParameter="{Binding AdvertId}"
+                                        />
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                        Path= GetAdvertDetailsPageCommand}"
+                                        CommandParameter="{Binding AdvertId}"
+                                        />
+                                    
+                                </Grid.GestureRecognizers>
+
+                                <!-- Picture -->
+                                <Image>
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Pictures[0]}"
+                                                        CachingEnabled="True"
+                                                        CacheValidity="23:00:00.0"
+                                                        >
+                                            
+                                        </UriImageSource>
+                                    </Image.Source>
+                                </Image>
+
+                                <Grid Grid.Row="1" Padding="0" BackgroundColor="LightGray">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Name -->
+                                    <Label Text="{Binding Name}" 
+                                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                                        
+                                        FontSize="20"
+
+                                        FontAttributes="Bold"
+                                        VerticalTextAlignment="Center"
+                                    />
+                                    
+                                    <!-- Address -->
+                                    <Label Text="{Binding Address}" 
+                                        Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                           
+                                        FontAttributes="Italic"
+                                        FontSize="15"
+                                        TextColor="DimGray"
+                                        HorizontalTextAlignment="End"       
+                                    />
+
+                                    <!-- Type -->
+                                    <Label Text="{Binding Type}" 
+                                        Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1"
+                                        
+                                        BackgroundColor="DimGray"
+                                        TextColor="White"
+                                           
+                                        FontSize="15"/>
+
+                                    <!-- BillIncluded -->
+                                    <Label Text="{Binding IncludesBills, Converter= {StaticResource IncBillsConverter}}" 
+                                        Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1"
+                                        HorizontalOptions="End"
+                                           
+                                        BackgroundColor="DimGray"
+                                        TextColor="White"
+                                           
+                                        FontSize="11"/>
+                                    
+                                    <!-- Price -->
+                                    <Label Text="{Binding Price}" 
+                                        Grid.Column="0" Grid.Row="3"
+                                           
+                                        BackgroundColor="DimGray"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                           
+                                        FontSize="40"
+                                    />
+
+                                    <!-- Score -->
+                                    <Label Text="Score" 
+                                        Grid.Column="1" Grid.Row="2"
+                                        FontSize="15"
+                                           
+                                        TextColor="White"
+                                        BackgroundColor="PaleVioletRed"
+                                    />
+                                    <Label Text="{Binding Score}" 
+                                        Grid.Column="1" Grid.Row="3"
+                                        FontSize="40"
+                                           
+                                        TextColor="White"
+                                        FontAttributes="Italic"
+                                        BackgroundColor="PaleVioletRed"
+                                    />
+                                    
+                                    <!-- MeetingTime -->
+                                    <Label Text="Meeting: " 
+                                       Grid.Column="0" Grid.Row="5"
+                                       FontSize="15"
+                                    />
+                                    <Label Text="{Binding MeetingTime}" 
+                                       Grid.Column="1" Grid.Row="5"
+                                       FontSize="15"
+                                    />
+                                    
+                                    <!-- Contact -->
+                                    <Button
+                                        Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2"
+                                        
+                                        Text="{Binding PhoneContact}"
+                                        BackgroundColor="WhiteSmoke"
+                                        FontSize="25"
+                                        TextColor="Black"
+                                        FontAttributes="Bold"
+                                        BorderColor="PaleVioletRed"
+                                        BorderWidth="3"
+                                        
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                                                    Path= PhoneCallCommand}"
+                                        CommandParameter="{Binding PhoneContact}"
+                                    />
+
+                                    <!---->
+
+
+                                    <!-- PersonalNotes -->
+                                    <Label Text="{Binding PersonalNotes}" 
+                                        Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
+                                           
+                                        BackgroundColor="LightGray"
+                                        TextColor="Black"
+                                           
+                                        FontSize="16"
+                                           
+                                        Padding="5"
+                                    />
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
+
+        <!-- New Advert Button-->
+        <Button 
+            Text="New Advert"
+                
+            TextColor="White"
+            FontSize="32"
+            BackgroundColor="DarkRed"
+            Padding="5"
+            BorderColor="White"
+            BorderWidth="3"
+                
+            Grid.Row="2"
+            
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeAdvertsVM}}, 
+                            Path= GetNewAdvertPageCommand}"
+        />
+
+    </Grid>
+
+</ContentPage>
